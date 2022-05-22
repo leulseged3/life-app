@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware('auth')->prefix('users')->group(function() {
     Route::get('/', [UserController::class,'index']);
+    Route::post('/edit', [UserController::class,'update']);
     // Route::post('add-student',[UserController::class, 'create']);
     // Route::get('detail/{id}',[UserController::class, 'detail']);
 });
