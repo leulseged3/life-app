@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EndUser;
+use App\Models\Enduser;
 
 class UserController extends Controller
 {
     function index(){
-        $users = EndUser::all();
+        $users = Enduser::all();
         return view('users.index')->with('users',$users);
     }
 
     function update(Request $request){
         //send validation error via session or other way or $errors
-        $user = EndUser::find($request->user_id);
+        $user = Enduser::find($request->user_id);
         if($request->first_name) {
             $user->first_name = $request->first_name;
         }
