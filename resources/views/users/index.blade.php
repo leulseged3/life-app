@@ -8,7 +8,6 @@
           <th>Email</th>
           <th>Username</th>
           <th>Mobile No</th>
-          <th>Is MHP</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -20,10 +19,15 @@
             <td>{{$user->email}}</td>
             <td>{{$user->username}}</td>
             <td>{{$user->mobile_number}}</td>
-            <td>{{$user->is_mhp ? 'Yes' : 'No'}}</td>
             <td class="d-flex" style="justify-content: space-around">
-              {{-- <a href="#"><i class="fas fa-info" title="Detail"></i></a> --}}
-              <a href="#"><i class="fas fa-edit" title="Edit"></i></a>
+              <a 
+                href="#" 
+                data-toggle="modal" 
+                data-target="#user-edit-modal"
+                data-user="{{$user}}"
+              >
+                <i class="fas fa-edit" title="Edit"></i>
+              </a>
               <a href="#"><i class="fas fa-trash" title="Delete" style="color: red"></i></a>
             </td>
         </tr>
@@ -40,5 +44,6 @@
       </tr>
       </tfoot> --}}
     </table>
+    @include('users.edit')
   </x-layouts.table>
 </x-layouts.app>

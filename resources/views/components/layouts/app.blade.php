@@ -13,7 +13,7 @@
     <!-- IonIcons -->
     <link rel="stylesheet" href="{{ URL::asset('css/ionicons.min.css') }}">
     <!-- Theme style -->
-    <!-- @stack('additional-css') -->
+    @stack('additional-css')
     <link rel="stylesheet" href="{{ URL::asset('css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -221,7 +221,7 @@ to get the desired effect
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
                   <div class="d-flex align-items-center">
                     <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
                     <p>
@@ -365,7 +365,7 @@ to get the desired effect
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-      
+        {{ $slot }}
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
