@@ -26,7 +26,7 @@
                 data-target="#user-edit-modal"
                 data-user="{{$user}}"
               >
-                <i class="fas fa-edit" title="Edit"></i>
+                <i class="fas fa-edit" title="Edit" ></i>
               </a>
               <a href="#"><i class="fas fa-trash" title="Delete" style="color: red"></i></a>
             </td>

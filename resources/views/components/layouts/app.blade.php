@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/ionicons.min.css') }}">
     <!-- Theme style -->
     @stack('additional-css')
+    <link rel="stylesheet" href="{{ URL::asset('css/sweet-alert.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -361,7 +362,7 @@ to get the desired effect
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
@@ -397,6 +398,22 @@ to get the desired effect
 <script src="{{ URl::asset('js/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ URL::asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ URL::asset('js/sweet-alert.min.js') }}"></script>
+@if(session()->has('message'))
+  <script>
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    // if(sess)
+    Toast.fire({
+      icon: 'success',
+      title: "{{ session()->get('message') }}"
+    });
+  </script>
+@endif
 <!-- AdminLTE -->
 @stack('additional-js')
 <script src="{{ URL::asset('js/adminlte.js') }}"></script>

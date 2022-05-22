@@ -13,6 +13,7 @@ class UserController extends Controller
     }
 
     function update(Request $request){
+        //send validation error via session or other way or $errors
         $user = EndUser::find($request->user_id);
         if($request->first_name) {
             $user->first_name = $request->first_name;
@@ -29,7 +30,10 @@ class UserController extends Controller
         if($request->mobile_number) {
             $user->mobile_number = $request->mobile_number;
         }
-        $user->save();
-        return redirect()->back();
+        if($user->save()) {
+            return redirect()->back()->with('message','User updates successfully!');
+        } else {
+            return redirect()->back()->with('message','Oops, something went wrong!');
+        }
     }
 }
