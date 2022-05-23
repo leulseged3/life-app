@@ -31,7 +31,7 @@
               <a 
                 href="#"
                 data-toggle="modal" 
-                data-target="#user-delete-modal"
+                data-target="#mhp-delete-modal"
                 data-mhp="{{$mhp}}"
               >
                 <i class="fas fa-trash" title="Delete" style="color: red"></i>
@@ -42,5 +42,6 @@
       </tbody>
     </table>
     @include('mhps.edit')
+    @include('mhps.delete')
   </x-layouts.table>
 </x-layouts.app>
