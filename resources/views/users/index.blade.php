@@ -52,5 +52,6 @@
       </tfoot> --}}
     </table>
     @include('users.edit')
+    @include('users.delete')
   </x-layouts.table>
 </x-layouts.app>
