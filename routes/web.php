@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MhpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,12 @@ Route::middleware('auth')->prefix('users')->group(function() {
     Route::get('/', [UserController::class,'index']);
     Route::post('/edit', [UserController::class,'update']);
     Route::post('/delete', [UserController::class,'delete']);
-    // Route::post('add-student',[UserController::class, 'create']);
-    // Route::get('detail/{id}',[UserController::class, 'detail']);
+});
+
+Route::middleware('auth')->prefix('mhps')->group(function() {
+    Route::get('/', [MhpController::class,'index']);
+    Route::post('/edit', [MhpController::class,'update']);
+    Route::post('/delete', [MhpController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
