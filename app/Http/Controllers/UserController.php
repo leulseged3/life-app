@@ -33,7 +33,7 @@ class UserController extends Controller
         if($user->save()) {
             return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' info updated successfully!');
         } else {
-            return redirect()->back()->with('message','Oops, something went wrong!');
+            return redirect()->back();
         }
     }
 
@@ -41,6 +41,8 @@ class UserController extends Controller
         $user = Enduser::find($request->user_id);
         if($user->delete()){
             return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
+        } else {
+            return redirect()->back();
         }
     }
 }
