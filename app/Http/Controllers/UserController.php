@@ -8,7 +8,7 @@ use App\Models\Enduser;
 class UserController extends Controller
 {
     function index(){
-        $users = Enduser::all();
+        $users = Enduser::where('is_mhp',0)->get();
         return view('users.index')->with('users',$users);
     }
 
