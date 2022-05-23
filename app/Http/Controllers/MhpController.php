@@ -8,7 +8,7 @@ use App\Models\Enduser;
 class MhpController extends Controller
 {
     function index(){
-        $mhps = Enduser::where('is_mhp', 1)->get();
+        $mhps = Enduser::where('is_mhp', 1)->paginate(5);
 
         return view('mhps.index')->with('mhps',$mhps);
     }
