@@ -31,9 +31,16 @@ class UserController extends Controller
             $user->mobile_number = $request->mobile_number;
         }
         if($user->save()) {
-            return redirect()->back()->with('message','User updates successfully!');
+            return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' info updated successfully!');
         } else {
             return redirect()->back()->with('message','Oops, something went wrong!');
+        }
+    }
+
+    function delete(Request $request){
+        $user = Enduser::find($request->user_id);
+        if($user->delete()){
+            return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
         }
     }
 }
