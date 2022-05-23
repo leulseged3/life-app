@@ -23,7 +23,7 @@
               <a 
                 href="#" 
                 data-toggle="modal" 
-                data-target="#user-edit-modal"
+                data-target="#mhp-edit-modal"
                 data-mhp="{{$mhp}}"
               >
                 <i class="fas fa-edit" title="Edit" ></i>
@@ -41,5 +41,6 @@
         @endforeach
       </tbody>
     </table>
+    @include('mhps.edit')
   </x-layouts.table>
 </x-layouts.app>
