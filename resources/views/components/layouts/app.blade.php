@@ -235,7 +235,7 @@ to get the desired effect
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/mhps" class="nav-link {{ $currentpage === "Medical Health Professionals" ? "active" : ""}}">
                   <div class="d-flex align-items-center">
                   <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
                   <p>
