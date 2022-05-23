@@ -1,5 +1,5 @@
 <x-layouts.app currentpage="Users">
-  <x-layouts.table title="Users">
+  <x-layouts.table title="Users List">
     <table id="example1" class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -52,6 +52,5 @@
       </tfoot> --}}
     </table>
     @include('users.edit')
-    @include('users.delete')
   </x-layouts.table>
 </x-layouts.app>
