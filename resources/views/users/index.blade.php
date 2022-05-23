@@ -28,7 +28,14 @@
               >
                 <i class="fas fa-edit" title="Edit" ></i>
               </a>
-              <a href="#"><i class="fas fa-trash" title="Delete" style="color: red"></i></a>
+              <a 
+                href="#"
+                data-toggle="modal" 
+                data-target="#user-delete-modal"
+                data-user="{{$user}}"
+              >
+                <i class="fas fa-trash" title="Delete" style="color: red"></i>
+              </a>
             </td>
         </tr>
         @endforeach
@@ -45,5 +52,6 @@
       </tfoot> --}}
     </table>
     @include('users.edit')
+    @include('users.delete')
   </x-layouts.table>
 </x-layouts.app>
