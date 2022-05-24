@@ -245,7 +245,9 @@ to get the desired effect
             </a>
           </li>
 
-          <li class="nav-item {{ $currentpage === "Categories" ? "menu-open" : ""}}">
+          <li class="nav-item 
+            {{ ($currentpage === "Categories" || $currentpage === "Specialities") ? "menu-open" : ""}}"
+          >
             <a href="/categories" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
