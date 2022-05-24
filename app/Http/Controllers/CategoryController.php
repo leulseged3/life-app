@@ -36,7 +36,13 @@ class CategoryController extends Controller
 
     }
 
-    public function delete(){
+    public function delete(Request $request){
+        $category = Category::find($request->category_id);
 
+        if($category->delete()){
+            return redirect()->back()->with('message',$category->title.' deleted successfully!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

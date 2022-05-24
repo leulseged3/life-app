@@ -24,8 +24,17 @@
             <span class="info-box-text" style="font-weight: bold;">{{$category->title}}</span>
             <span class="info-box-text">{{$category->description}}</span>
           </div>
+          <a 
+            href="#"
+            data-toggle="modal" 
+            data-target="#category-delete-modal"
+            data-category="{{$category}}"
+          >
+            <i class="fa fa-trash-alt" style="color: red;"></i>
+          </a>
         </div>
       </div>
     @endforeach
   </div>
+  @include('categories.delete')
 </x-layouts.app>
