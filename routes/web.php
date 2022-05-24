@@ -8,6 +8,8 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MhpController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SpecialityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +51,13 @@ Route::middleware('auth')->prefix('categories')->group(function() {
     Route::get('/', [CategoryController::class,'index']);
     Route::post('/create',[CategoryController::class, 'create']);
     Route::post('/delete', [CategoryController::class,'delete']);
+});
+
+//SPECIALITIES ROUTES
+Route::middleware('auth')->prefix('specialities')->group(function() {
+    Route::get('/', [SpecialityController::class,'index']);
+    Route::post('/create',[SpecialityController::class, 'create']);
+    Route::post('/delete', [SpecialityController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
