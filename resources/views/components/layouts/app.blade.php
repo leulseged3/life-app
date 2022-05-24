@@ -208,38 +208,60 @@ to get the desired effect
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="/" class="nav-link {{ $currentpage === "Dashboard" ? "active" : ""}}"">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
-                    <p>
-                      Users
-                      <!-- <i class="fas fa-angle-left right"></i> -->
-                      <!-- <span class="badge badge-info right">6</span> -->
-                    </p>
-                  </div>
-                </a>
-              </li>
+          </li>
 
+          <li class="nav-item">
+            <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                <p>
+                  Users
+                  <!-- <i class="fas fa-angle-left right"></i> -->
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/mhps" class="nav-link {{ $currentpage === "Medical Health Professionals" ? "active" : ""}}">
+              <div class="d-flex align-items-center">
+              <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+              <p>
+                MHP's
+                <!-- <i class="right fas fa-angle-left"></i> -->
+              </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item {{ $currentpage === "Categories" ? "menu-open" : ""}}">
+            <a href="/categories" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
+                <p>
+                  Categories & Specialities
+                </p>
+                {{-- <i class="right fas fa-angle-left"></i> --}}
+              </div>
+            </a>
+            <ul class="nav nav-treeview nav-child-indent">
               <li class="nav-item">
-                <a href="/mhps" class="nav-link {{ $currentpage === "Medical Health Professionals" ? "active" : ""}}">
+                <a href="/categories" class="nav-link {{ $currentpage === "Categories" ? "active" : ""}}">
                   <div class="d-flex align-items-center">
                   <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
                   <p>
-                    MHP's
+                    Categories
                     <!-- <i class="right fas fa-angle-left"></i> -->
                   </p>
                   </div>
@@ -247,93 +269,94 @@ to get the desired effect
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/specialities" class="nav-link {{ $currentpage === "Specialities" ? "active" : ""}}">
                   <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
-                    <p>
-                      Categories & Specialities Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-rss" style="margin-right: 10px"></i>
-                    <p>
-                      Resources Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-ticket-alt" style="margin-right: 10px"></i>
-                    <p>
-                      Tickets Raised
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-user-circle" style="margin-right: 10px"></i>
-                    <p>
-                      Profile Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
-                    <p>
-                      Room & Chat Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-user-plus" style="margin-right: 10px"></i>
-                    <p>
-                      Invite & Referral Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-question-circle" style="margin-right: 10px"></i>
-                    <p>
-                      FAQ's Management
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-star" style="margin-right: 10px"></i>
-                    <p>
-                      Ratings Management
-                    </p>
+                  <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                  <p>
+                    Specialities
+                    <!-- <i class="right fas fa-angle-left"></i> -->
+                  </p>
                   </div>
                 </a>
               </li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-rss" style="margin-right: 10px"></i>
+                <p>
+                  Resources
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-ticket-alt" style="margin-right: 10px"></i>
+                <p>
+                  Tickets Raised
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-user-circle" style="margin-right: 10px"></i>
+                <p>
+                  Profile
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
+                <p>
+                  Room & Chat
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-user-plus" style="margin-right: 10px"></i>
+                <p>
+                  Invite & Referral
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-question-circle" style="margin-right: 10px"></i>
+                <p>
+                  FAQ
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-star" style="margin-right: 10px"></i>
+                <p>
+                  Ratings
+                </p>
+              </div>
+            </a>
           </li>
         </ul>
       </nav>
