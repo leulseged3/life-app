@@ -16,17 +16,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="/categories/create">
+      <form method="POST" action="/categories/create" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
           <div class="form-row">
-            <div class="form-group col-md-7">
+            <div class="form-group col-md-12">
               <label for="title">Title</label>
               <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-            </div>
-            <div class="form-group col-md-5">
-              <label for="description">Icon</label>
-              <input type="text" class="form-control" id="icon" name="icon" placeholder="Icon">
             </div>
           </div>
         
@@ -36,9 +32,17 @@
               <input type="text" class="form-control" id="description" name="description" placeholder="Description">
             </div>
           </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="icon" class="form-label">Icon</label>
+              <input type="file" class="form-control" id="icon" name="icon" placeholder="Icon">
+            </div>
+          </div>
         </div>
+
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger">Yes</button>
+          <button type="submit" class="btn btn-success">Yes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         </div>
       </form>

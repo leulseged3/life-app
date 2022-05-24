@@ -1,11 +1,24 @@
 <x-layouts.app currentpage="Categories">
   @include('categories.add')
+  @foreach ($errors->all() as $error)
+  <ul>
+    <li>
+      <p style="color: red">{{ $error }}</p>
+    </li>
+  </ul>
+  @endforeach
   <div class="row">
     @foreach($categories as $category)
       <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
-          <span class="info-box-icon bg-info">
-            <i class="far fa-envelope"></i>
+          <span class="info-box-icon">
+            {{-- <i class="far fa-envelope"></i> --}}
+            <img 
+              src="{{ URL::asset('storage/icons/'.$category->icon) }}" 
+              alt="" 
+              title=""
+              style="width: 100px; height: 70px;"
+            />
           </span>
           <div class="info-box-content">
             <span class="info-box-text" style="font-weight: bold;">{{$category->title}}</span>
