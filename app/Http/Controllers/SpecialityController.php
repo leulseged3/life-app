@@ -36,7 +36,13 @@ class SpecialityController extends Controller
 
     }
 
-    public function delete(){
+    public function delete(Request $request){
+        $speciality = Speciality::find($request->speciality_id);
 
+        if($speciality->delete()){
+            return redirect()->back()->with('message',$speciality->title.' deleted successfully!');
+        } else {
+            return redirect()->back();
+        }
     }
 }

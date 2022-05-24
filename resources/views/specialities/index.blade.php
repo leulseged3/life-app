@@ -12,7 +12,6 @@
       <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
           <span class="info-box-icon">
-            {{-- <i class="far fa-envelope"></i> --}}
             <img 
               src="{{ URL::asset('storage/icons/specialities/'.$speciality->icon) }}" 
               alt="" 
@@ -24,8 +23,17 @@
             <span class="info-box-text" style="font-weight: bold;">{{$speciality->title}}</span>
             <span class="info-box-text">{{$speciality->description}}</span>
           </div>
+          <a 
+            href="#"
+            data-toggle="modal" 
+            data-target="#speciality-delete-modal"
+            data-speciality="{{$speciality}}"
+          >
+            <i class="fa fa-trash-alt" style="color: red;"></i>
+          </a>
         </div>
       </div>
     @endforeach
   </div>
+  @include('specialities.delete')
 </x-layouts.app>
