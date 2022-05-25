@@ -7,6 +7,9 @@
     $('.select2').select2();
   </script>
 @endpush
+@php
+    $categories = App\Models\Category::all();
+@endphp
 <x-layouts.app currentpage="Add Article">
   <div class="row">
     <form class="col-md-8">
@@ -30,13 +33,9 @@
           <div class="form-group">
             <label>Categories</label>
             <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-              <option>Alabama</option>
-              <option>Alaska</option>
-              <option>California</option>
-              <option>Delaware</option>
-              <option>Tennessee</option>
-              <option>Texas</option>
-              <option>Washington</option>
+              @foreach ($categories as $category)
+                <option>{{$category->title}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
