@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MhpController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SpecialityController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,16 @@ Route::middleware('auth')->prefix('specialities')->group(function() {
     Route::get('/', [SpecialityController::class,'index']);
     Route::post('/create',[SpecialityController::class, 'create']);
     Route::post('/delete', [SpecialityController::class,'delete']);
+});
+
+//SPECIALITIES ROUTES
+Route::middleware('auth')->prefix('articles')->group(function() {
+    Route::get('/', [ArticleController::class,'index']);
+    Route::get('/add',function(){
+        return view('articles.add');
+    });
+    Route::post('/add',[ArticleController::class, 'create']);
+    Route::post('/delete', [ArticleController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
