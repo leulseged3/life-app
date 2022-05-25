@@ -284,7 +284,10 @@ to get the desired effect
             </ul>
           </li>
 
-          <li class="nav-item">
+          <li 
+            class="nav-item
+            {{ ($currentpage === "Articles" || $currentpage === "Pending Articles" || $currentpage === "Add Article") ? "menu-open" : ""}}"
+          >
             <a href="#" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-rss" style="margin-right: 10px"></i>
@@ -293,6 +296,40 @@ to get the desired effect
                 </p>
               </div>
             </a>
+            <ul class="nav nav-treeview nav-child-indent">
+              <li class="nav-item">
+                <a href="/articles" class="nav-link {{ $currentpage === "Articles" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-newspaper" style="margin-right: 10px"></i>
+                    <p>
+                      Articles
+                    </p>
+                  </div>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="/categories" class="nav-link {{ $currentpage === "Categories" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-spinner" style="margin-right: 10px"></i>
+                    <p>
+                      Pending Articles
+                    </p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/articles/add" class="nav-link {{ $currentpage === "Add Article" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-plus" style="margin-right: 10px"></i>
+                    <p>
+                      Add Article
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">
