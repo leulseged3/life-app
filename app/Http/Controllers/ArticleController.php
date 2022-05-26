@@ -39,4 +39,14 @@ class ArticleController extends Controller
         $article->categories()->attach($request->categories);
         return view('articles.add')->with('message','successfully create article');
     }
+
+    public function delete(Request $request){
+        $article = Article::find($request->article_id);
+
+        if($article->delete()){
+            return redirect()->back()->with('message','Article deleted successfully!');
+        } else {
+            return redirect()->back();
+        }
+    }
 }
