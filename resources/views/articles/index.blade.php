@@ -65,4 +65,5 @@
       </table>
     </div>
   </div>
+  @include('articles.delete')
 </x-layouts.app>
