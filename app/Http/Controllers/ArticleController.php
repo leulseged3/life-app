@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Article;
 
@@ -33,6 +34,7 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->feature_image = $icon_name;
         $article->video_link = $request->video_link;
+        $article->user_id = Auth::user()->id;
         $article->save();
         $article->categories()->attach($request->categories);
         return view('articles.add')->with('message','successfully create article');
