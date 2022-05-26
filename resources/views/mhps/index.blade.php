@@ -1,7 +1,7 @@
 <x-layouts.app currentpage="Medical Health Professionals">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Users List</h3>
+      <h3 class="card-title">Medical Health Professionals List</h3>
     </div>
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
@@ -46,7 +46,7 @@
         </tbody>
       </table>
   </div>
-  <div class="card-footer clearfix">
+  <div class="card-footer clearfix bg-white">
     {{$mhps->links()}}
   </div>
 </div>

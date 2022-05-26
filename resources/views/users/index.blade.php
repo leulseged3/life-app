@@ -56,7 +56,7 @@
           </tfoot> --}}
         </table>
       </div>
-      <div class="card-footer clearfix">
+      <div class="card-footer clearfix bg-white">
         {{$users->links()}}
       </div>
     </div>

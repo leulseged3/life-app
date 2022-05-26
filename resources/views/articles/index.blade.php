@@ -65,7 +65,7 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer clearfix">
+    <div class="card-footer clearfix bg-white">
       {{$articles->links()}}
     </div>
   </div>
