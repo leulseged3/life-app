@@ -298,7 +298,7 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview nav-child-indent">
               <li class="nav-item">
-                <a href="/articles" class="nav-link {{ $currentpage === "Articles" ? "active" : ""}}">
+                <a href="/articles" class="nav-link {{ ($currentpage === "Articles" || $currentpage === "Article Detail") ? "active" : ""}}">
                   <div class="d-flex align-items-center">
                   <i class="nav-icon fas fa-newspaper" style="margin-right: 10px"></i>
                     <p>
