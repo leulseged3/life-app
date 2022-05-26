@@ -65,6 +65,9 @@
         </tbody>
       </table>
     </div>
+    <div class="card-footer clearfix">
+      {{$articles->links()}}
+    </div>
   </div>
   @include('articles.delete')
   @include('articles.edit')
