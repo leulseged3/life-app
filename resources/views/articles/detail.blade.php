@@ -11,8 +11,8 @@
         <span class="badge badge-info">{{$category->title}}</span>
       @endforeach
       <p style="font-size: 25px;font-weight: bold;">{{$article->title}}</p>
-      <p>{{$article->user->name}}</p>
-      <p>{{date('D j, Y',strtotime($article->updated_at))}}</p>
+      <p class="text-muted"><i class="fas fa-user"></i>&nbsp;&nbsp;{{$article->user->name}}</p>
+      <p class="text-muted"><i class="fas fa-clock"></i>&nbsp;{{date('D j, Y',strtotime($article->updated_at))}}</p>
       <hr/>
       <p>{{$article->description}}</p>
     </div>
