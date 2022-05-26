@@ -49,4 +49,11 @@ class ArticleController extends Controller
             return redirect()->back();
         }
     }
+
+    public function detail(Request $request, $id){
+        $article = Article::find($id);
+        if($article) {
+            return view('articles.detail')->with('article', $article);
+        }
+    }
 }

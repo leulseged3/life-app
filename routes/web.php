@@ -69,6 +69,7 @@ Route::middleware('auth')->prefix('articles')->group(function() {
     });
     Route::post('/add',[ArticleController::class, 'create']);
     Route::post('/delete', [ArticleController::class,'delete']);
+    Route::get('/{id}', [ArticleController::class,'detail']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
