@@ -10,7 +10,7 @@ use App\Http\Controllers\MhpController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\FaqController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,7 +61,7 @@ Route::middleware('auth')->prefix('specialities')->group(function() {
     Route::post('/delete', [SpecialityController::class,'delete']);
 });
 
-//SPECIALITIES ROUTES
+//ARTICLES ROUTES
 Route::middleware('auth')->prefix('articles')->group(function() {
     Route::get('/', [ArticleController::class,'index']);
     Route::get('/add',function(){
@@ -70,6 +70,14 @@ Route::middleware('auth')->prefix('articles')->group(function() {
     Route::post('/add',[ArticleController::class, 'create']);
     Route::post('/delete', [ArticleController::class,'delete']);
     Route::get('/{id}', [ArticleController::class,'detail']);
+});
+
+//FAQs ROUTES
+Route::middleware('auth')->prefix('faqs')->group(function() {
+    Route::get('/', [FaqController::class,'index']);
+    Route::post('/create',[FaqController::class, 'create']);
+    Route::post('/delete', [FaqController::class,'delete']);
+    Route::post('/edit',[FaqController::class, 'create']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
