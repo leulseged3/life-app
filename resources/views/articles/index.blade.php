@@ -38,9 +38,10 @@
               <td>{{substr($article->description,0,100)}}</td>
               <td>{{$article->user->name}}</td>
               <td class="d-flex" style="justify-content: space-around">
-                <a href="#">
+                <a href="/articles/{{$article->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a>
+
                 <a 
                   href="#"
                   data-toggle="modal" 
@@ -66,4 +67,5 @@
     </div>
   </div>
   @include('articles.delete')
+  @include('articles.edit')
 </x-layouts.app>

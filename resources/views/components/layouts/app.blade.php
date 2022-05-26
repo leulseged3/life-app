@@ -286,7 +286,7 @@ to get the desired effect
 
           <li 
             class="nav-item
-            {{ ($currentpage === "Articles" || $currentpage === "Pending Articles" || $currentpage === "Add Article") ? "menu-open" : ""}}"
+            {{ ($currentpage === "Articles" || $currentpage === "Pending Articles" || $currentpage === "Add Article" || $currentpage === "Article Detail") ? "menu-open" : ""}}"
           >
             <a href="#" class="nav-link">
               <div class="d-flex align-items-center">
