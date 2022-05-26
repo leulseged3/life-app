@@ -377,7 +377,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/faqs" class="nav-link {{ $currentpage === "Frequently Asked Questions" ? "active" : ""}}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-question-circle" style="margin-right: 10px"></i>
                 <p>

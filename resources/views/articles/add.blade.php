@@ -52,7 +52,7 @@
             <input type="file" class="form-control-file" id="feature_image" name="feature_image" onchange="loadFile(event)">
           </div>
           <div class="form-group">
-            <label for="description">Example textarea</label>
+            <label for="description">Description</label>
             <textarea class="form-control" id="description" rows="4" name="description"></textarea>
           </div>
         </div>
