@@ -36,9 +36,9 @@ class FaqController extends Controller
 
     }
 
-    public function delete($id){
-        $faq = Faq::find($id);
-        if($faq.delete()) {
+    public function delete(Request $request){
+        $faq = Faq::find($request->faq_id);
+        if($faq->delete()) {
             return redirect()->back()->with('message','FAQ deleted successfully!');
         }
     }

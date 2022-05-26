@@ -13,12 +13,30 @@
             </button>
           </h5>
           <div style="align-self: flex-end; justify-content: flex-end; justify-self: flex-end">
-            <button class="btn btn-info btn-sm">
+            <button 
+              class="btn btn-info btn-sm"
+              data-toggle="modal" 
+              data-target="#faq-edit-modal"
+              data-faq="{{$faq}}"
+            >
               <i class="fa fa-edit" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-danger btn-sm">
+            <button 
+              class="btn btn-danger btn-sm"
+              data-toggle="modal" 
+              data-target="#faq-delete-modal"
+              data-faq="{{$faq}}"
+            >
               <i class="fa fa-trash-alt" aria-hidden="true" ></i>
             </button>
+            {{-- <a 
+              href="#"
+              data-toggle="modal" 
+              data-target="#category-delete-modal"
+              data-category="{{$category}}"
+            >
+              <i class="fa fa-trash-alt" style="color: red;"></i>
+            </a> --}}
           </div>
         </div>
         <div id="collapse{{$faq->id}}" class="collapse" aria-labelledby="heading{{$faq->id}}" data-parent="#accordion">
@@ -41,5 +59,6 @@
     <div>
       {{$faqs->links()}}
     </div>
+    @include('faqs.delete')
   </div>
 </x-layouts.app>
