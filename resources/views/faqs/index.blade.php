@@ -29,14 +29,6 @@
             >
               <i class="fa fa-trash-alt" aria-hidden="true" ></i>
             </button>
-            {{-- <a 
-              href="#"
-              data-toggle="modal" 
-              data-target="#category-delete-modal"
-              data-category="{{$category}}"
-            >
-              <i class="fa fa-trash-alt" style="color: red;"></i>
-            </a> --}}
           </div>
         </div>
         <div id="collapse{{$faq->id}}" class="collapse" aria-labelledby="heading{{$faq->id}}" data-parent="#accordion">
@@ -59,6 +51,7 @@
     <div>
       {{$faqs->links()}}
     </div>
+    @include('faqs.edit')
     @include('faqs.delete')
   </div>
 </x-layouts.app>

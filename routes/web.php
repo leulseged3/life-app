@@ -78,7 +78,7 @@ Route::middleware('auth')->prefix('faqs')->group(function() {
     Route::get('/', [FaqController::class,'index']);
     Route::post('/create',[FaqController::class, 'create']);
     Route::post('/delete', [FaqController::class,'delete']);
-    Route::post('/edit',[FaqController::class, 'create']);
+    Route::post('/edit',[FaqController::class, 'update']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

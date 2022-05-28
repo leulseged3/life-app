@@ -65,7 +65,7 @@
             </div>
 
             <div class="form-group">
-              <label for="description">Example textarea</label>
+              <label for="description">Description</label>
               <textarea class="form-control" id="description" rows="4" name="description"></textarea>
             </div>
           </div>
