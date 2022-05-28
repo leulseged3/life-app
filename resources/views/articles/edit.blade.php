@@ -14,13 +14,14 @@
       $('#article_title').text("Edit " + article.title);
       $('#title').val(article.title);
       $('#description').val(article.description);
+      $('#article_id').val(article.id);
       // $('#title').val(article.title);
       // $('#title').val(article.title);
       
-      // let loadFile = function(event) {
-      //   let image = document.getElementById('output');
-      //   image.src = URL.createObjectURL(event.target.files[0]);
-      // };
+      let loadFile = function(event) {
+        let image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
     });
   </script> 
 
@@ -37,7 +38,7 @@
           <span aria-hidden="true">&times;</span>
           </button>
       </div>
-      <form method="POST" action="/articles/edit">
+      <form method="POST" action="/articles/edit" enctype="multipart/form-data">
         @csrf
         <input type="hidden" id="article_id" name="article_id"/>
         <div class="modal-body">

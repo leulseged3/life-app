@@ -1,4 +1,11 @@
 <x-layouts.app currentpage="Articles">
+  @foreach ($errors->all() as $error)
+  <ul>
+    <li>
+      <p style="color: red">{{ $error }}</p>
+    </li>
+  </ul>
+  @endforeach
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Articles List</h3>

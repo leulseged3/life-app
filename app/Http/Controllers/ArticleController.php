@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Article;
 
@@ -38,6 +39,37 @@ class ArticleController extends Controller
         $article->save();
         $article->categories()->attach($request->categories);
         return view('articles.add')->with('message','successfully create article');
+    }
+
+    public function update(Request $request){
+        Validator::make($request->all(), [
+            'title' => 'string',
+            'feature_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'video_link' => 'string',
+            'description' => 'string',
+            "categories"    => "array|min:1",
+            "categories.*"  => "string|distinct|min:1",
+        ])->validate();
+
+        $article = Article::find($request->article_id);
+        if($request->title){
+            $article->title = $request->title;
+        }
+        if($request->file('feature_image')){
+            Storage::delete('public/feature_images'.$article->feature_image);
+            $path = $request->file('feature_image')->store('public/feature_images');
+            $icon_name = explode("/", $path)[2];
+            $article->feature_image = $icon_name;
+        }
+        if($request->video_link){
+            $article->video_link = $request->video_link;
+        }
+        if($request->categories){
+            $article->categories()->detach($article->categories);
+            $article->categories()->attach($request->categories);
+        }
+        $article->save();
+        return redirect()->back()->with('message','article is updated successfully!');
     }
 
     public function delete(Request $request){
