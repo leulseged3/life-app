@@ -61,5 +61,8 @@
         </div>
       </div>
     </form>
+    <div class="col-md-4">
+      @include('articles.recent')
+    </div>
   </div>
 </x-layouts.app>
