@@ -13,4 +13,9 @@ class CategoryController extends Controller
 
         return response()->json($categories, 200);
     }
+
+    public function show($id){
+        $category = Category::find($id);
+        return response()->json($category, 200);
+    }
 }
