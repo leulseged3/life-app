@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,8 @@ Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
 Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
     Route::get('/', [FaqController::class, 'index']);
     Route::get('/{id}', [FaqController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('categories')->group(function() {
+    Route::get('/', [CategoryController::class, 'index']);
 });
