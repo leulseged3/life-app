@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +34,8 @@ Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
     Route::get('/{id}', [ArticleController::class, 'show']);
     Route::post('/', [ArticleController::class, 'create']);
     Route::delete('/{id}', [ArticleController::class, 'delete']);
+});
 
+Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
+    Route::get('/', [FaqController::class, 'index']);
 });
