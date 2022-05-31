@@ -62,6 +62,10 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
+        if(!$article){
+            return response()->json(['success'=>false,'message'=>'no article found with this id'], 404);
+        }
+
         if($article->user_id != $request->user()->id) {
             return response()->json([
                 'success'=> false,
