@@ -38,4 +38,5 @@ Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
 
 Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
     Route::get('/', [FaqController::class, 'index']);
+    Route::get('/{id}', [FaqController::class, 'show']);
 });

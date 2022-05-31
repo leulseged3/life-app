@@ -12,4 +12,12 @@ class FaqController extends Controller
         $faqs = Faq::all();
         return response()->json($faqs, 200);
     }
+
+    public function show($id){
+        $faq = Faq::find($id);
+        if($faq){
+            return response()->json($faq, 200);
+        }
+        return response()->json(['success'=>false,'message'=>'no faq found with this id'], 404);
+    }
 }
