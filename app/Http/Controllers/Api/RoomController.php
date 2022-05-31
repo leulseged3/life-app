@@ -15,8 +15,12 @@ class RoomController extends Controller
             'limit' => 'required|numeric',
             'date_time' => 'required|string|max:255',
             "categories"    => "required|array|min:1",
-            "categories.*"  => "required|string|distinct|min:1",
+            "categories.*"  => "required|numeric|distinct|min:1",
         ]);
+
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
 
         $room = new Room;
         $room->title = $request->title;
