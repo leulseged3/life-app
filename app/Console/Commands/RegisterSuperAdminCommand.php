@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\User;
+use App\Models\Admin;
 
 class RegisterSuperAdminCommand extends Command
 {
@@ -22,11 +22,11 @@ class RegisterSuperAdminCommand extends Command
     protected $description = 'Register super Admin';
 
     /**
-     * User model.
+     * Admin model.
      *
      * @var object
      */
-    private $user;
+    private $admin;
 
     /**
      * Execute the console command.
@@ -38,11 +38,11 @@ class RegisterSuperAdminCommand extends Command
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Admin $admin)
     {
         parent::__construct();
 
-        $this->user = $user;
+        $this->admin = $admin;
     }
 
     /**
@@ -54,7 +54,7 @@ class RegisterSuperAdminCommand extends Command
     {
         $details = $this->getDetails();
 
-        $admin = $this->user->createSuperAdmin($details);
+        $admin = $this->admin->createSuperAdmin($details);
 
         $this->display($admin);
         return 0;
