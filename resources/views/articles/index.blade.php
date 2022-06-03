@@ -43,7 +43,11 @@
               </td>
 
               <td>{{substr($article->description,0,100)}}</td>
-              <td>{{$article->user->name}}</td>
+              @if($article->owner->name)
+                <td>{{$article->owner->name}}</td>
+              @else
+                <td>{{$article->owner->first_name}} {{$article->owner->last_name}}</td>
+              @endif
               <td class="d-flex" style="justify-content: space-around">
                 <a href="/articles/{{$article->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>

@@ -36,8 +36,8 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->feature_image = 'sdfgh';
         $article->video_link = $request->video_link;
-        $article->user_id = $request->user()->id;
-        $article->save();
+        // $article->user_id = $request->user()->id;
+        $request->user()->articles()->save($article);
         $article->categories()->attach($request->categories);
 
         return response()->json([
@@ -46,7 +46,6 @@ class ArticleController extends Controller
             "article" => $article
         ],200);
     }
-
     public function show($id)
     {
         $article = Article::find($id);

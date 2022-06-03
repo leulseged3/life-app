@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'username',
+        'mobile_number',
         'password',
+        'is_mhp'
     ];
 
     /**
@@ -43,7 +48,7 @@ class User extends Authenticatable
     ];
 
     public function articles(){
-        return $this->hasMany(Article::class);
+        return $this->morphMany(Article::class,'owner');
     }
 
     public function isSuperAdmin(): bool {

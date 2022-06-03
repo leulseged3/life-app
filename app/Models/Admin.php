@@ -43,7 +43,7 @@ class Admin extends Authenticatable
     ];
 
     public function articles(){
-        return $this->hasMany(Article::class);
+        return $this->morphMany(Article::class,'owner');
     }
 
     public function isSuperAdmin(): bool {

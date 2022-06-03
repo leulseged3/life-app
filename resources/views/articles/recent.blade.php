@@ -1,5 +1,5 @@
 @php
-  $recent_articles = App\Models\Article::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->take(3)->get();
+  $recent_articles = App\Models\Article::where('owner_id', Auth::user()->id)->orderBy('updated_at', 'desc')->take(3)->get();
 @endphp
 <h4 class="text-muted" style="text-align: center; font-weight: bold;">your recent articles</h4>
 <hr />

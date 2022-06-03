@@ -35,8 +35,7 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->feature_image = $icon_name;
         $article->video_link = $request->video_link;
-        $article->user_id = Auth::user()->id;
-        $article->save();
+        Auth::user()->articles()->save($article);
         $article->categories()->attach($request->categories);
         return view('articles.add')->with('message','successfully create article');
     }

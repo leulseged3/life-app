@@ -11,7 +11,12 @@
         <span class="badge badge-info">{{$category->title}}</span>
       @endforeach
       <p style="font-size: 25px;font-weight: bold;">{{$article->title}}</p>
-      <p class="text-muted"><i class="fas fa-user"></i>&nbsp;&nbsp;{{$article->user->name}}</p>
+      @if($article->owner->name)
+        <p class="text-muted"><i class="fas fa-user"></i>&nbsp;&nbsp;{{$article->owner->name}} (Admin)</p>
+      @else
+        <p class="text-muted"><i class="fas fa-user"></i>&nbsp;&nbsp;{{$article->owner->first_name}} {{$article->owner->last_name}}</p>
+      @endif
+      {{-- <p class="text-muted"><i class="fas fa-user"></i>&nbsp;&nbsp;{{$article->owner->name}}</p> --}}
       <p class="text-muted"><i class="fas fa-clock"></i>&nbsp;{{date('D j, Y',strtotime($article->updated_at))}}</p>
       <hr/>
       <p>{{$article->description}}</p>

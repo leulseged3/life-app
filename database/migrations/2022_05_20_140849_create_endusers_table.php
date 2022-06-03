@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('mobile_number');
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->unsignedTinyInteger('is_mhp')->default(0);
             $table->timestamps();
         });
