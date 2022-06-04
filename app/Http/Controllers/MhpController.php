@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Enduser;
+use App\Models\User;
 
 class MhpController extends Controller
 {
     function index(){
-        $mhps = Enduser::where('is_mhp', 1)->paginate(5);
+        $mhps = User::where('is_mhp', 1)->paginate(5);
 
         return view('mhps.index')->with('mhps',$mhps);
     }
 
     function update(Request $request){
         //send validation error via session or other way or $errors
-        $user = Enduser::find($request->user_id);
+        $user = User::find($request->user_id);
         if($request->first_name) {
             $user->first_name = $request->first_name;
         }
@@ -38,7 +38,7 @@ class MhpController extends Controller
         }
     }
     function delete(Request $request){
-        $user = Enduser::find($request->user_id);
+        $user = User::find($request->user_id);
         if($user->delete()){
             return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
         } else {
