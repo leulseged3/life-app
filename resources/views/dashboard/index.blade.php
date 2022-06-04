@@ -33,13 +33,13 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>0</h3>
+          <h3>{{$data['categories']}}</h3>
           <p>Categories and Specialities</p>
         </div>
         <div class="icon">
           <i class="fas fa-list-alt"></i>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="/categories" class="small-box-footer">
           More info <i class="fas fa-arrow-circle-right"></i>
         </a>
       </div>
@@ -48,13 +48,13 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>0</h3>
+          <h3>{{$data['articles']}}</h3>
           <p>Resources</p>
         </div>
         <div class="icon">
           <i class="fas fa-rss"></i>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="/articles" class="small-box-footer">
           More info <i class="fas fa-arrow-circle-right"></i>
         </a>
       </div>
@@ -63,13 +63,13 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>0</h3>
-          <p>Tickets</p>
+          <h3>{{$data['faqs']}}</h3>
+          <p>Faqs</p>
         </div>
         <div class="icon">
-          <i class="fas fa-ticket-alt"></i>
+          <i class="fas fa-question-circle"></i>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="/faqs" class="small-box-footer">
           More info <i class="fas fa-arrow-circle-right"></i>
         </a>
       </div>
