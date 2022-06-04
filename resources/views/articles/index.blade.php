@@ -19,6 +19,7 @@
             <th>Category</th>
             <th>Description</th>
             <th>Owner</th>
+            <th>Is Admin</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -47,6 +48,11 @@
                 <td>{{$article->owner->name}}</td>
               @else
                 <td>{{$article->owner->first_name}} {{$article->owner->last_name}}</td>
+              @endif
+              @if($article->owner->name)
+                <td>Yes</td>
+              @else
+                <td>No</td>
               @endif
               <td class="d-flex" style="justify-content: space-around">
                 <a href="/articles/{{$article->id}}">
