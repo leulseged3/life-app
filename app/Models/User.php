@@ -51,6 +51,21 @@ class User extends Authenticatable
         return $this->morphMany(Article::class,'owner');
     }
 
+   /**
+    * The roles that belong to the User
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    */
+   public function followers()
+   {
+       return $this->belongsToMany(Follow::class,'follows', 'following_id', 'follower_id');
+   }
+
+   public function followings()
+   {
+       return $this->belongsToMany(Follow::class,'follows', 'follower_id', 'following_id');
+   }
+
     public function isSuperAdmin(): bool {
         return (bool) $this->is_super_admin;
     }

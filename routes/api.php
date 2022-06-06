@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\CategoryController;
-
+use App\Http\Controllers\Api\FollowController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,4 +45,10 @@ Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
 Route::middleware('auth:sanctum')->prefix('categories')->group(function() {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('/{id}', [CategoryController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('follow')->group(function() {
+    Route::get('/followers', [FollowController::class, 'followers']);
+    Route::get('/followings', [FollowController::class, 'followings']);
+    Route::get('/{id}', [FollowController::class, 'toggleFollower']);
 });
