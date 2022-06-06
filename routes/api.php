@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FollowController;
+use App\Http\Controllers\Api\InviteController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,4 +53,10 @@ Route::middleware('auth:sanctum')->prefix('follow')->group(function() {
     Route::get('/followers', [FollowController::class, 'followers']);
     Route::get('/followings', [FollowController::class, 'followings']);
     Route::get('/{id}', [FollowController::class, 'toggleFollower']);
+});
+
+Route::middleware('auth:sanctum')->prefix('invite')->group(function() {
+    Route::post('/', [InviteController::class, 'create']);
+    Route::get('/', [InviteController::class, 'index']);
+    Route::get('/{id}', [InviteController::class, 'show']);
 });
