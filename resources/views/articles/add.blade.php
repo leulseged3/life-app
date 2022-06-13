@@ -16,6 +16,13 @@
     $categories = App\Models\Category::all();
 @endphp
 <x-layouts.app currentpage="Add Article">
+  @foreach ($errors->all() as $error)
+  <ul>
+    <li>
+      <p style="color: red">{{ $error }}</p>
+    </li>
+  </ul>
+  @endforeach
   <div class="row">
     <form class="col-md-8" enctype="multipart/form-data" method="POST" action="/articles/add">
       @csrf
@@ -34,11 +41,11 @@
         <div class="card-body">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
           </div>
           <div class="form-group">
             <label>Categories</label>
-            <select name="categories[]" class="select2" multiple="multiple" data-placeholder="Select a category" style="width: 100%;">
+            <select name="categories[]" class="select2" multiple="multiple" data-placeholder="Select a category" style="width: 100%;" required>
               @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->title}}</option>
               @endforeach
@@ -49,11 +56,11 @@
 
           <div class="form-group">
             <label for="feature_image">Feature Image</label>
-            <input type="file" class="form-control-file" id="feature_image" name="feature_image" onchange="loadFile(event)">
+            <input type="file" class="form-control-file" id="feature_image" name="feature_image" onchange="loadFile(event)" required>
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="4" name="description"></textarea>
+            <textarea class="form-control" id="description" rows="4" name="description" required></textarea>
           </div>
         </div>
         <div class="card-footer">

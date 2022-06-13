@@ -1,5 +1,12 @@
 <x-layouts.app currentpage="Frequently Asked Questions">
   @include('faqs.add')
+  @foreach ($errors->all() as $error)
+  <ul>
+    <li>
+      <p style="color: red">{{ $error }}</p>
+    </li>
+  </ul>
+  @endforeach
   <div id="accordion" class="col-md-10">
     @foreach ($faqs as $faq)
       <div class="card">

@@ -22,21 +22,21 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+              <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
             </div>
           </div>
         
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="description">Description</label>
-              <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+              <input type="text" class="form-control" id="description" name="description" placeholder="Description" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="icon" class="form-label">Icon</label>
-              <input type="file" class="form-control" id="icon" name="icon" placeholder="Icon">
+              <input type="file" class="form-control" id="icon" name="icon" placeholder="Icon" required>
             </div>
           </div>
         </div>

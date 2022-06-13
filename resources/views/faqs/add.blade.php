@@ -22,21 +22,21 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="question">Question</label>
-              <textarea class="form-control" id="question" rows="3" name="question"></textarea>
+              <textarea class="form-control" id="question" rows="3" name="question" required></textarea>
             </div>
           </div>
         
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="answer">Answer</label>
-              <textarea class="form-control" id="answer" rows="4" name="answer"></textarea>
+              <textarea class="form-control" id="answer" rows="4" name="answer" required></textarea>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="image" class="form-label">Image</label>
-              <input type="file" class="form-control" id="image" name="image">
+              <input type="file" class="form-control" id="image" name="image" required>
             </div>
           </div>
         </div>
