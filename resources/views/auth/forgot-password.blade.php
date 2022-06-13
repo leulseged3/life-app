@@ -10,7 +10,7 @@
   <form action="forgot-password" method="post">
     @csrf
     <div class="card-body">
-      <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+      <p class="login-box-msg">You forgot your password? Here you can easily reset your password.</p>
       <div class="input-group mb-3">
         <input 
           type="email" 
@@ -28,7 +28,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block">Request new password</button>
+          <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
         </div>
       </div>
       <p class="mt-3 mb-1">
