@@ -261,7 +261,7 @@ to get the desired effect
               <li class="nav-item">
                 <a href="/categories" class="nav-link {{ $currentpage === "Categories" ? "active" : ""}}">
                   <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                  <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
                   <p>
                     Categories
                     <!-- <i class="right fas fa-angle-left"></i> -->
