@@ -44,7 +44,7 @@
               <div class="col-md-4">
                 <img 
                   src="{{ URL::asset('storage/faqs/'.$faq->image) }}" 
-                  style="height: 150px; border-radius: 3px;"
+                  style="width: 100%; height: 150px; border-radius: 3px;"
                 />
               </div>
               <div class="col-md-8">
