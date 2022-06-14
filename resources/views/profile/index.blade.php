@@ -97,7 +97,7 @@
               <div class="form-group row">
                 <label for="inputExperience" class="col-sm-2 col-form-label">Confirm New Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputConfirmNewPassword" placeholder="*******" name="confirm_new_password">
+                  <input type="password" class="form-control" id="inputConfirmNewPassword" placeholder="*******" name="new_password_confirmation">
                 </div>
               </div>
 

@@ -20,8 +20,8 @@ class ProfileController extends Controller
             'name' => 'nullable|string',
             'email' => 'nullable|email',
             'old_password' => 'nullable|string',
-            'new_password' => 'nullable|string',
-            "confirm_new_password" => "nullable|string",
+            'new_password' => 'nullable|string|confirmed|min:6',
+            "new_password_confirmation" => "nullable|string|min:6",
             'profile_pic' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ])->validate();
 
@@ -47,11 +47,6 @@ class ProfileController extends Controller
         }
 
         if($request->new_password) {
-            if($request->new_password != $request->confirm_new_password ){
-                $errors = new Illuminate\Support\MessageBag();
-                $errors->add('password', 'Password does not match');
-                return redirect()->back()-with( $errors);
-            }
             $admin->password = Hash::make($request->new_password);
         }
         if($admin->save()){
