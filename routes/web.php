@@ -13,6 +13,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,13 @@ Route::middleware('auth')->prefix('profile')->group(function() {
     Route::get('/', [ProfileController::class,'index']);
     Route::post('/update', [ProfileController::class,'update']);
     // Route::post('/delete', [ProfileController::class,'delete']);
+});
+
+//TiCKETS RAISED ROUTES
+Route::middleware('auth')->prefix('tickets')->group(function() {
+    Route::get('/', [TicketController::class,'index']);
+    Route::post('/reply', [TicketController::class,'reply']);
+    Route::post('/delete', [TicketController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

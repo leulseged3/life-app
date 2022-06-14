@@ -29,6 +29,13 @@ class RatingController extends Controller
             ], 400);
         }
 
+        if(!$request->user()->is_mhp) {
+            return response()->json([
+                'status' => false,
+                'message' => 'you can not non mhp user.'
+            ], 400);
+        }
+
         if($validator->fails()){
             $errors = $validator->errors();
             return response()->json([

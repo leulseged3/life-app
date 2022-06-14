@@ -248,7 +248,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/tickets" class="nav-link {{ $currentpage === "Tickets Raised" ? "active" : ""}}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-ticket-alt" style="margin-right: 10px"></i>
                 <p>

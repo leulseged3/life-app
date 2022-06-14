@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\FollowController;
 use App\Http\Controllers\Api\InviteController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,5 +73,11 @@ Route::middleware('auth:sanctum')->prefix('ratings')->group(function() {
 Route::middleware('auth:sanctum')->prefix('profile')->group(function() {
     Route::patch('/', [UserController::class, 'update']);
     Route::post('/upload', [UserController::class, 'uploadProfile']);
-    Route::get('/{id}', [UserController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('tickets')->group(function() {
+    Route::get('/', [TicketController::class, 'index']);
+    Route::post('/', [TicketController::class, 'create']);
+    Route::post('/upload', [TicketController::class, 'uploadProfile']);
+    Route::get('/{id}', [TicketController::class, 'show']);
 });
