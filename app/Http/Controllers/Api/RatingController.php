@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Rating;
 use App\Models\Totalrating;
+use App\Models\User;
 
 class RatingController extends Controller
 {
@@ -21,6 +22,8 @@ class RatingController extends Controller
             'rate' => 'required|numeric',
         ]);
 
+        $user = User::find($request->user_id);
+
 
         if($request->user_id == $request->user()->id) {
             return response()->json([
@@ -29,10 +32,10 @@ class RatingController extends Controller
             ], 400);
         }
 
-        if(!$request->user()->is_mhp) {
+        if(!$user->is_mhp) {
             return response()->json([
                 'status' => false,
-                'message' => 'you can not non mhp user.'
+                'message' => 'you can not rate non-mhp user.'
             ], 400);
         }
 
