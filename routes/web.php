@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\RatingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +81,12 @@ Route::middleware('auth')->prefix('faqs')->group(function() {
     Route::post('/create',[FaqController::class, 'create']);
     Route::post('/delete', [FaqController::class,'delete']);
     Route::post('/edit',[FaqController::class, 'update']);
+});
+
+//Ratings ROUTES
+Route::middleware('auth')->prefix('ratings')->group(function() {
+    Route::get('/', [RatingController::class,'index']);
+    Route::post('/delete', [RatingController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

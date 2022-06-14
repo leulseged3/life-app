@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->morphMany(Article::class,'owner');
     }
 
+   public function rating(){
+       return $this->hasMany(Totalrating::class);
+   }
+
    /**
     * The roles that belong to the User
     *

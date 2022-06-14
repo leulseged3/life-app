@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\FaqController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FollowController;
 use App\Http\Controllers\Api\InviteController;
+use App\Http\Controllers\Api\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,4 +60,10 @@ Route::middleware('auth:sanctum')->prefix('invite')->group(function() {
     Route::post('/', [InviteController::class, 'create']);
     Route::get('/', [InviteController::class, 'index']);
     Route::get('/{id}', [InviteController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('ratings')->group(function() {
+    Route::get('/', [RatingController::class, 'index']);
+    Route::post('/', [RatingController::class, 'create']);
+    Route::get('/{id}', [RatingController::class, 'show']);
 });
