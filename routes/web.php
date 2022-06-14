@@ -12,6 +12,7 @@ use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,10 +84,17 @@ Route::middleware('auth')->prefix('faqs')->group(function() {
     Route::post('/edit',[FaqController::class, 'update']);
 });
 
-//Ratings ROUTES
+//RATINGS ROUTES
 Route::middleware('auth')->prefix('ratings')->group(function() {
     Route::get('/', [RatingController::class,'index']);
     Route::post('/delete', [RatingController::class,'delete']);
+});
+
+//ADMIN PROFILE ROUTES
+Route::middleware('auth')->prefix('profile')->group(function() {
+    Route::get('/', [ProfileController::class,'index']);
+    Route::post('/update', [ProfileController::class,'update']);
+    // Route::post('/delete', [ProfileController::class,'delete']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

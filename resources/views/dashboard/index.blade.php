@@ -48,7 +48,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>{{$data['articles']}}</h3>
+          {{-- <h3>{{$data['articles']}}</h3> --}}
           <p>Resources</p>
         </div>
         <div class="icon">

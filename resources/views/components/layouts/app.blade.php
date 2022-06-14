@@ -303,7 +303,7 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/profile" class="nav-link {{ $currentpage === "Admin Profile" ? "active" : "" }}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-user-circle" style="margin-right: 10px"></i>
                 <p>

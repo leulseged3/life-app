@@ -55,7 +55,7 @@ class ArticleController extends Controller
             $article->title = $request->title;
         }
         if($request->file('feature_image')){
-            Storage::delete('public/feature_images'.$article->feature_image);
+            Storage::delete('public/feature_images/'.$article->feature_image);
             $path = $request->file('feature_image')->store('public/feature_images');
             $icon_name = explode("/", $path)[2];
             $article->feature_image = $icon_name;
