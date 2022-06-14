@@ -38,9 +38,9 @@
               <td>{{$ticket->reply}}</td>
 
               <td class="d-flex" style="justify-content: space-around">
-                <a href="/tickets/{{$ticket->id}}">
+                {{-- <a href="/tickets/{{$ticket->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
-                </a>
+                </a> --}}
 
                 <a 
                   href="#"
