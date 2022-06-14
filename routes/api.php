@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FollowController;
 use App\Http\Controllers\Api\InviteController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,4 +67,10 @@ Route::middleware('auth:sanctum')->prefix('ratings')->group(function() {
     Route::get('/', [RatingController::class, 'index']);
     Route::post('/', [RatingController::class, 'create']);
     Route::get('/{id}', [RatingController::class, 'show']);
+});
+
+Route::middleware('auth:sanctum')->prefix('profile')->group(function() {
+    Route::patch('/', [UserController::class, 'update']);
+    Route::post('/upload', [UserController::class, 'uploadProfile']);
+    Route::get('/{id}', [UserController::class, 'show']);
 });

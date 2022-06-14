@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('mobile_number')->unique();
+            $table->string('bios')->nullable();
+            $table->string('profile_pic')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedTinyInteger('is_mhp')->default(0);

@@ -25,7 +25,9 @@ class User extends Authenticatable
         'username',
         'mobile_number',
         'password',
-        'is_mhp'
+        'is_mhp',
+        'profile_pic',
+        'bios'
     ];
 
     /**

@@ -20,6 +20,7 @@ class AuthController extends Controller
             'mobile_number' => 'required|string|unique:users|max:255',
             'is_mhp'=>'required',
             'password' => 'required|min:6',
+            'bios'=> 'nullable|string'
         ]);
 
         if($validator->fails()){
@@ -37,7 +38,8 @@ class AuthController extends Controller
                 'username' => $request->username,
                 'mobile_number' => $request->mobile_number,
                 'is_mhp' => $request->is_mhp,
-                'password' => Hash::make($request->password)
+                'bios' => $request->bios,
+                'password' => Hash::make($request->password),
             ]);
             $token = $user->createToken('auth_token')->plainTextToken;
         
@@ -48,6 +50,7 @@ class AuthController extends Controller
                 'username' => $request->username,
                 'mobile_number' => $request->mobile_number,
                 'is_mhp' => $request->is_mhp,
+                'bios' => $request->bios,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
             ],200);
