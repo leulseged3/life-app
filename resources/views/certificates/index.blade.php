@@ -23,7 +23,7 @@
         <tbody>
           @foreach($certificates as $certificate)
             <tr>
-              <td>{{$certificate->user->username}}</td>
+              <td><a href="/mhps/{{$certificate->user->id}}">{{$certificate->user->username}}</a></td>
               <td>
                 <a 
                   href="/certificates/open/{{$certificate->file}}"

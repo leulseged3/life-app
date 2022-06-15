@@ -57,6 +57,10 @@ class User extends Authenticatable
        return $this->hasMany(Totalrating::class);
    }
 
+   public function certificate(){
+        return $this->hasOne(Certificate::class);
+   }
+
    /**
     * The roles that belong to the User
     *
@@ -64,32 +68,11 @@ class User extends Authenticatable
     */
    public function followers()
    {
-       return $this->belongsToMany(Follow::class,'follows', 'following_id', 'follower_id');
+       return $this->belongsToMany(Self::class,'follows', 'following_id', 'user_id');
    }
 
    public function followings()
    {
-       return $this->belongsToMany(Follow::class,'follows', 'follower_id', 'following_id');
+       return $this->belongsToMany(Self::class,'follows', 'user_id', 'following_id');
    }
-
-    public function isSuperAdmin(): bool {
-        return (bool) $this->is_super_admin;
-    }
-
-    public function createSuperAdmin(array $details): self {
-        $user = new self($details);
-
-        if(!$this->superAdminExists()){
-            $user->is_super_admin = 1;
-            $user->password = Hash::make($user->password);
-            $user->save();
-        } else {
-            $user->email = "false";
-        }
-        return $user;
-    }
-
-    public function superAdminExists(): int {
-        return self::where('is_super_admin', 1)->count();
-    }
 }

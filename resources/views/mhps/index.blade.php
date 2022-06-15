@@ -21,9 +21,13 @@
               <td>{{$mhp->first_name}}</td>
               <td>{{$mhp->last_name}}</td>
               <td>{{$mhp->email}}</td>
-              <td>{{$mhp->username}}</td>
+              <td><a href="/mhps/{{$mhp->id}}">{{$mhp->username}}</a></td>
               <td>{{$mhp->mobile_number}}</td>
               <td class="d-flex" style="justify-content: space-around">
+                {{-- <a href="/mhps/{{$mhp->id}}">
+                  <i class="fas fa-info" title="Info" ></i>
+                </a> --}}
+
                 <a 
                   href="#" 
                   data-toggle="modal" 

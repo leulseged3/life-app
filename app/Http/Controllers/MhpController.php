@@ -39,10 +39,16 @@ class MhpController extends Controller
     }
     function delete(Request $request){
         $user = User::find($request->user_id);
+   
         if($user->delete()){
             return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
         } else {
             return redirect()->back();
         }
+    }
+
+    function show($id){
+        $mhp = User::find($id);
+        return view('mhps.detail')->with('mhp', $mhp);
     }
 }

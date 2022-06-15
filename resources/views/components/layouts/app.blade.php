@@ -148,7 +148,7 @@ to get the desired effect
             </a>
           </li>
           {{-- {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates") ? "active" : ""}} --}}
-          <li class="nav-item {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates") ? "menu-open" : ""}}"">
+          <li class="nav-item {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates" || $currentpage === "MHP Details") ? "menu-open" : ""}}"">
             <a href="/mhps" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>

@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('users')->group(function() {
 //MHP's ROUTES
 Route::middleware('auth')->prefix('mhps')->group(function() {
     Route::get('/', [MhpController::class,'index']);
+    Route::get('/{id}', [MhpController::class,'show']);
     Route::post('/edit', [MhpController::class,'update']);
     Route::post('/delete', [MhpController::class,'delete']);
 });
