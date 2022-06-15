@@ -77,6 +77,7 @@ Route::middleware('auth:sanctum')->prefix('profile')->group(function() {
 
 Route::middleware('auth:sanctum')->prefix('users')->group(function() {
     Route::get('/', [UserController::class, 'index']);
+    Route::get('/{id}', [UserController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->prefix('tickets')->group(function() {

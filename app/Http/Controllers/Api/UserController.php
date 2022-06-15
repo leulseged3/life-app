@@ -7,12 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Follow;
 
 class UserController extends Controller
 {
     public function index(){
         $mhps = User::where('is_mhp',1)->with('rating')->get();
         return response()->json($mhps, 200);
+    }
+
+    public function show(Request $request, $id){
+        $user = User::find($id);
+
+        $following = Follow::where('user_id',$request->user()->id)->where('following_id', $id)->count();
+
+        return response()->json([
+            'user' => $user,
+            'is_following' => $following
+        ], 200);
     }
 
     public function update(Request $request){
