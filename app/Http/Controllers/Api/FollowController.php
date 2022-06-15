@@ -9,6 +9,7 @@ use App\Models\Follow;
 class FollowController extends Controller
 {
     public function toggleFollower(Request $request, $id){
+        //should check if the user is mhp or not
         if($request->user()->id == $id) {
             return response()->json([
                 "success"=> false,
@@ -30,12 +31,13 @@ class FollowController extends Controller
     }
 
     public function followers(Request $request){
-        $followers = Follow::where('following_id',$request->user()->id)->get();
+        $followers = $request->user()->followers()->get();
         return response()->json($followers, 200);
     }
 
     public function followings(Request $request){
-        $followers = Follow::where('follower_id',$request->user()->id)->get();
-        return response()->json($followers, 200);
+        $followings = $followers = $request->user()->followings()->get();
+
+        return response()->json($followings, 200);
     }
 }
