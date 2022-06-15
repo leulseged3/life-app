@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('totalratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->integer('number_of_raters');
             $table->integer('total_ratings');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 

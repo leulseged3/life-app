@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('invites', function (Blueprint $table) {
             $table->id();
-            $table->integer('sender_id')->unsigned();
-            $table->integer('receiver_id')->unsigned();
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->string('url');
             $table->timestamps();
+
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');;
+
         });
     }
 
