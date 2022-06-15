@@ -102,10 +102,22 @@ to get the desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{URL::asset('img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          @if (Auth::user()->profile_pic)
+            <img 
+              class="img-circle elevation-2"
+              src="{{ URL::asset('storage/profile_pics/'.Auth::user()->profile_pic) }}" 
+              alt="User profile picture"
+            >
+          @else
+            <img 
+              class="img-circle elevation-2"
+              src="{{ URL::asset('img/profile_avatar.png') }}" 
+              alt="User profile picture"
+            >
+          @endif
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{auth()->user()->name}}</a>
+          <a href="/profile" class="d-block">{{auth()->user()->name}}</a>
         </div>
       </div>
 
