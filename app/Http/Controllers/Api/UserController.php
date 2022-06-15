@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function index(){
+        $mhps = User::where('is_mhp',1)->with('rating')->get();
+        return response()->json($mhps, 200);
+    }
+
     public function update(Request $request){
         $validator = Validator::make($request->all(), [
             'first_name' => 'nullable|string|max:255',

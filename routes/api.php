@@ -75,6 +75,10 @@ Route::middleware('auth:sanctum')->prefix('profile')->group(function() {
     Route::post('/upload', [UserController::class, 'uploadProfile']);
 });
 
+Route::middleware('auth:sanctum')->prefix('users')->group(function() {
+    Route::get('/', [UserController::class, 'index']);
+});
+
 Route::middleware('auth:sanctum')->prefix('tickets')->group(function() {
     Route::get('/', [TicketController::class, 'index']);
     Route::post('/', [TicketController::class, 'create']);
