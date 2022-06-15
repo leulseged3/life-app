@@ -147,17 +147,42 @@ to get the desired effect
               </div>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a href="/mhps" class="nav-link {{ $currentpage === "Medical Health Professionals" ? "active" : ""}}">
+          {{-- {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates") ? "active" : ""}} --}}
+          <li class="nav-item {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates") ? "menu-open" : ""}}"">
+            <a href="/mhps" class="nav-link">
               <div class="d-flex align-items-center">
-              <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
-              <p>
-                MHP's
-                <!-- <i class="right fas fa-angle-left"></i> -->
-              </p>
+                <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                <p>
+                  MHP's
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
               </div>
             </a>
+            <ul class="nav nav-treeview nav-child-indent">
+              <li class="nav-item">
+                <a href="/mhps" class="nav-link {{ $currentpage === "Medical Health Professionals" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                    <p>
+                      MHP's
+                      <!-- <i class="right fas fa-angle-left"></i> -->
+                    </p>
+                  </div>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/certificates" class="nav-link {{ $currentpage === "Certificates" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-file" style="margin-right: 10px"></i>
+                    <p>
+                      Certificates
+                      <!-- <i class="right fas fa-angle-left"></i> -->
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item 

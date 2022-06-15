@@ -14,6 +14,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\CertificateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,13 @@ Route::middleware('auth')->prefix('tickets')->group(function() {
     Route::get('/', [TicketController::class,'index']);
     Route::post('/reply', [TicketController::class,'reply']);
     Route::post('/delete', [TicketController::class,'delete']);
+});
+
+//CERTIFICATES ROUTES
+Route::middleware('auth')->prefix('certificates')->group(function() {
+    Route::get('/', [CertificateController::class,'index']);
+    Route::post('/action', [CertificateController::class,'action']);
+    Route::get('/open/{file}',[CertificateController::class,'open']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

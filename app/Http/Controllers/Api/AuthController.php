@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Certificate;
 
 class AuthController extends Controller
 {
@@ -20,7 +21,8 @@ class AuthController extends Controller
             'mobile_number' => 'required|string|unique:users|max:255',
             'is_mhp'=>'required',
             'password' => 'required|min:6',
-            'bios'=> 'nullable|string'
+            'bios'=> 'nullable|string',
+            'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024'
         ]);
 
         if($validator->fails()){
@@ -41,6 +43,33 @@ class AuthController extends Controller
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);
+
+            if($request->file('certificate') && $request->is_mhp){
+                $path = $request->file('certificate')->store('public/certificate');
+                $file_name = explode("/", $path)[2];
+                $ceritificate = new Certificate;
+                $ceritificate->user_id = $user->id;
+                $ceritificate->file = $file_name;
+                $ceritificate->save();
+
+                $token = $user->createToken('auth_token')->plainTextToken;
+        
+                return response()->json([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'username' => $request->username,
+                    'mobile_number' => $request->mobile_number,
+                    'is_mhp' => $request->is_mhp,
+                    'bios' => $request->bios,
+                    'access_token' => $token,
+                    'token_type' => 'Bearer',
+                    'certificate' => $file_name
+                ],200);
+            }
+
+           
+
             $token = $user->createToken('auth_token')->plainTextToken;
         
             return response()->json([
