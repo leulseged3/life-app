@@ -70,12 +70,14 @@ Route::middleware('auth')->prefix('specialities')->group(function() {
 //ARTICLES ROUTES
 Route::middleware('auth')->prefix('articles')->group(function() {
     Route::get('/', [ArticleController::class,'index']);
+    Route::get('/pending', [ArticleController::class,'pendingArticles']);
     Route::get('/add',function(){
         return view('articles.add');
     });
     Route::post('/add',[ArticleController::class, 'create']);
     Route::post('/delete', [ArticleController::class,'delete']);
     Route::post('/edit', [ArticleController::class,'update']);
+    Route::post('/approve', [ArticleController::class,'approve']);
     Route::get('/{id}', [ArticleController::class,'detail']);
 });
 

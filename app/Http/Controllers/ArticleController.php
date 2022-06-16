@@ -12,9 +12,25 @@ use App\Models\Article;
 class ArticleController extends Controller
 {
     public function index(){
-        $articles = Article::paginate(5);
+        $articles = Article::where('status','approved')->paginate(5);
 
         return view('articles.index')->with('articles', $articles);
+    }
+
+    public function pendingArticles(){
+        $articles = Article::where('status','pending')->paginate(5);
+        return view('articles.pending')->with('articles', $articles);
+    }
+
+    public function approve(Request $request){
+        $article = Article::find($request->id);
+
+        if($article) {
+            $article->status = 'approved';
+            if($article->save()){
+                return redirect()->back()->with('message', 'Article is approved successfully!');
+            }
+        }
     }
 
     public function create(Request $request){
@@ -35,6 +51,7 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->feature_image = $icon_name;
         $article->video_link = $request->video_link;
+        $article->status = 'approved';
         Auth::user()->articles()->save($article);
         $article->categories()->attach($request->categories);
         return view('articles.add')->with('message','successfully create article');

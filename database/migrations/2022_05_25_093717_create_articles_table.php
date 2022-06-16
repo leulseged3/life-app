@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('feature_image');
             $table->string('video_link')->nullable();
             $table->string('owner_type');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

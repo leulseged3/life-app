@@ -18,10 +18,18 @@ class ArticleController extends Controller
 
     public function create(Request $request)
     {
+        
+        if(!$request->user()->is_mhp) {
+            return response()->json([
+                'success'=> false,
+                'message' => 'only mhp can create article'
+            ], 401);
+        }
+        
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required',
-            // 'feature_image' => 'required',
+            'feature_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'video_link' => 'string|nullable',
             "categories"    => "required|array|min:1",
             "categories.*"  => "required|numeric|distinct|min:1",
@@ -30,13 +38,15 @@ class ArticleController extends Controller
         if($validator->fails()){
             return response()->json(['error'=>$validator->errors()], 400);
         }
-    
+        
+        $path = $request->file('feature_image')->store('public/feature_images');
+        $image_name = explode("/", $path)[2];
+
         $article = new Article;
         $article->title = $request->title;
         $article->description = $request->description;
-        $article->feature_image = 'sdfgh';
+        $article->feature_image = $image_name;
         $article->video_link = $request->video_link;
-        // $article->user_id = $request->user()->id;
         $request->user()->articles()->save($article);
         $article->categories()->attach($request->categories);
 

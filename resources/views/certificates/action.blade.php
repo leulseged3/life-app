@@ -19,7 +19,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" action="/certificates/action/">
+      <form method="POST" action="{{URL::to('/certificates/action')}}">
         @csrf
         <input type="hidden" id="certificate_id" name="id"/>
         <input type="hidden" id="certificate_status" name="status"/>
