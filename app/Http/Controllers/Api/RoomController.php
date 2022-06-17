@@ -12,8 +12,10 @@ class RoomController extends Controller
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'limit' => 'required|numeric',
-            'date_time' => 'required|string|max:255',
+            'description' => 'required',
+            'date' => 'required|date|date_format:Y-m-d',
+            'time' => 'required|date_format:H:i',
+            'limit' => 'required|numeric|min:1',
             "categories"    => "required|array|min:1",
             "categories.*"  => "required|numeric|distinct|min:1",
         ]);
@@ -24,18 +26,20 @@ class RoomController extends Controller
 
         $room = new Room;
         $room->title = $request->title;
-        $room->user_id = $request->user()->id;
+        $room->description = $request->description;
+        $room->date = $request->date;
+        $room->time = $request->time;
         $room->limit = $request->limit;
-        $room->date_time = $request->date_time;
-
-        $room->save();
+        $request->user()->rooms()->save($room);
         $room->categories()->attach($request->categories);
 
         return response()->json([
             'title' => $room->title,
+            'description' => $room->description,
+            'date' => $room->date,
+            'time' => $room->time,
             'limit' => $room->limit,
-            'date_time' => $room->date_time,
-            'categories' => $room->categories
+            'categories' => $room->categories,
         ]);
     }
 }
