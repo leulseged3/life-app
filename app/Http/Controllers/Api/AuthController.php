@@ -13,6 +13,7 @@ use App\Models\Certificate;
 class AuthController extends Controller
 {
     public function register(Request $request){
+        //is mhp should be numeric
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -39,7 +40,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'mobile_number' => $request->mobile_number,
-                'is_mhp' => $request->is_mhp,
+                'is_mhp|numeric' => $request->is_mhp,
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);

@@ -29,7 +29,7 @@ class ArticleController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required',
-            'feature_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'feature_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'video_link' => 'string|nullable',
             "categories"    => "required|array|min:1",
             "categories.*"  => "required|numeric|distinct|min:1",
