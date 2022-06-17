@@ -35,6 +35,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->prefix('rooms')->group(function() {
     Route::post('/', [RoomController::class, 'create']);
     Route::get('/', [RoomController::class, 'index']);
+    Route::post('/toggle', [RoomController::class, 'toggle']);
 });
 
 Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
