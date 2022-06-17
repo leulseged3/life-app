@@ -46,21 +46,10 @@ class AuthController extends Controller
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);
+            
             $user->categories()->attach($request->categories);
 
-            // $user = new User;
-            // $user->first_name = $request->first_name;
-            // $user->last_name = $request->last_name;
-            // $user->email = $request->email;
-            // $user->username = $request->username;
-            // $user->mobile_number = $request->mobile_number;
-            // $user->is_mhp = $request->is_mhp;
-            // $user->bios = $request->bios;
-            // $user->password = Hash::make($request->password);
-
-            // $request->user()->categories()->save($user);
-
-            if($request->file('certificate') && $request->is_mhp === 1){
+            if($request->file('certificate') && $request->is_mhp == 1){
                 $path = $request->file('certificate')->store('public/certificate');
                 $file_name = explode("/", $path)[2];
                 $ceritificate = new Certificate;

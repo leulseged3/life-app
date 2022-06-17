@@ -25,7 +25,7 @@ class RatingController extends Controller
         $user = User::find($request->user_id);
 
 
-        if($request->user_id === $request->user()->id) {
+        if($request->user_id == $request->user()->id) {
             return response()->json([
                 'status' => false,
                 'message' => 'you can not rate yourself.'

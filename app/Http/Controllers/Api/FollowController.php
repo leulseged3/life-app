@@ -10,7 +10,7 @@ class FollowController extends Controller
 {
     public function toggleFollower(Request $request, $id){
         //should check if the user is mhp or not
-        if($request->user()->id === $id) {
+        if($request->user()->id == $id) {
             return response()->json([
                 "success"=> false,
                 "message"=>"you can not follow your self"
