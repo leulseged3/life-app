@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
+            $table->string('description');
             $table->integer('limit');
-            $table->string('date_time');
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

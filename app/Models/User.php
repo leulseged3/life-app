@@ -85,7 +85,7 @@ class User extends Authenticatable
        return $this->belongsToMany(Self::class,'follows', 'user_id', 'following_id')->select(['id']);
    }
 
-   public function isFollowing(): bool {
-    return (bool) $this->is_mhp;
+   public function rooms(){
+    return $this->hasMany(Room::class);
    }
 }
