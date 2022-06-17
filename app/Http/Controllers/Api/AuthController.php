@@ -20,7 +20,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'username' => 'required|string|unique:users|max:255',
             'mobile_number' => 'required|string|unique:users|max:255',
-            'is_mhp'=>'required',
+            'is_mhp'=>'required|numeric',
             'password' => 'required|min:6',
             'bios'=> 'nullable|string',
             'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024'
@@ -40,7 +40,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'mobile_number' => $request->mobile_number,
-                'is_mhp|numeric' => $request->is_mhp,
+                'is_mhp' => $request->is_mhp,
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);
