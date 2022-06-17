@@ -9,6 +9,11 @@ use App\Models\Room;
 
 class RoomController extends Controller
 {
+    public function index(){
+        $rooms = Room::paginate(5);
+        return response()->json($rooms, 200);
+    }
+    
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',

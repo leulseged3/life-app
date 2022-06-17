@@ -31,8 +31,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//ROOMS ROUTES
 Route::middleware('auth:sanctum')->prefix('rooms')->group(function() {
-    Route::post('/create', [RoomController::class, 'create']);
+    Route::post('/', [RoomController::class, 'create']);
+    Route::get('/', [RoomController::class, 'index']);
 });
 
 Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
