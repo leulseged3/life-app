@@ -20,7 +20,7 @@ class InviteController extends Controller
             'url' => 'required|string|max:255',
         ]);
 
-        if($request->user()->id == $request->receiver_id) {
+        if($request->user()->id === $request->receiver_id) {
             return response()->json([
                 "success"=> false,
                 "message"=>"you can not send invitation for your self"

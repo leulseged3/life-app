@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->hasOne(Certificate::class);
    }
 
+   public function categories(){
+        return $this->belongsToMany(Category::class);
+   }
+
    /**
     * The roles that belong to the User
     *
@@ -74,5 +78,14 @@ class User extends Authenticatable
    public function followings()
    {
        return $this->belongsToMany(Self::class,'follows', 'user_id', 'following_id');
+   }
+
+   public function followingsId()
+   {
+       return $this->belongsToMany(Self::class,'follows', 'user_id', 'following_id')->select(['id']);
+   }
+
+   public function isFollowing(): bool {
+    return (bool) $this->is_mhp;
    }
 }

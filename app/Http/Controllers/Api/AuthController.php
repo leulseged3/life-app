@@ -23,7 +23,9 @@ class AuthController extends Controller
             'is_mhp'=>'required|numeric',
             'password' => 'required|min:6',
             'bios'=> 'nullable|string',
-            'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024'
+            'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
+            "categories"    => "required|array|min:1",
+            "categories.*"  => "required|string|distinct|min:1",
         ]);
 
         if($validator->fails()){
@@ -44,8 +46,21 @@ class AuthController extends Controller
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);
+            $user->categories()->attach($request->categories);
 
-            if($request->file('certificate') && $request->is_mhp){
+            // $user = new User;
+            // $user->first_name = $request->first_name;
+            // $user->last_name = $request->last_name;
+            // $user->email = $request->email;
+            // $user->username = $request->username;
+            // $user->mobile_number = $request->mobile_number;
+            // $user->is_mhp = $request->is_mhp;
+            // $user->bios = $request->bios;
+            // $user->password = Hash::make($request->password);
+
+            // $request->user()->categories()->save($user);
+
+            if($request->file('certificate') && $request->is_mhp === 1){
                 $path = $request->file('certificate')->store('public/certificate');
                 $file_name = explode("/", $path)[2];
                 $ceritificate = new Certificate;
@@ -63,9 +78,11 @@ class AuthController extends Controller
                     'mobile_number' => $request->mobile_number,
                     'is_mhp' => $request->is_mhp,
                     'bios' => $request->bios,
+                    'certificate' => $file_name,
+                    'categories' => $request->categories,
                     'access_token' => $token,
                     'token_type' => 'Bearer',
-                    'certificate' => $file_name
+                    'categories' => $request->categories
                 ],200);
             }
 
@@ -83,6 +100,7 @@ class AuthController extends Controller
                 'bios' => $request->bios,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
+                'categories' => $user->categories
             ],200);
         }
     }
@@ -107,6 +125,7 @@ class AuthController extends Controller
             'is_mhp' => $user->is_mhp,
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'categories' => $user->categories
         ],200);
     }
 }

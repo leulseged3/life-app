@@ -11,8 +11,9 @@ use App\Models\Follow;
 
 class UserController extends Controller
 {
-    public function index(){
-        $mhps = User::where('is_mhp',1)->with('rating')->get();
+    public function index(Request $request){
+        $mhps = User::where('is_mhp',1)->with(['rating','followers'])->get();
+        
         return response()->json($mhps, 200);
     }
 
