@@ -59,7 +59,7 @@
           <hr />
           <div>
             <i class="fas fa-calendar" aria-hidden="true"> {{date("F j, Y",strtotime($room->date))}}</i>
-            <i style="margin-left: 40px;" class="fas fa-clock" aria-hidden="true"> {{date("F j, Y",strtotime($room->date))}}</i>
+            <i style="margin-left: 40px;" class="fas fa-clock" aria-hidden="true"> {{date("g:i a",strtotime($room->time))}}</i>
           </div>
         </div>
       </div>
