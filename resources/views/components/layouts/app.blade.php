@@ -288,16 +288,42 @@ to get the desired effect
             </a>
           </li>
 
-          <li class="nav-item">
+          <li 
+            class="nav-item
+            {{ ($currentpage === "Rooms & Chat" || $currentpage === "Rooms" || $currentpage === "Chat" || $currentpage === "Room Detail") ? "menu-open" : ""}}"
+          >
             <a href="#" class="nav-link">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
                 <p>
-                  Room & Chat
+                  Rooms & Chat
                 </p>
               </div>
             </a>
-          </li>
+            <ul class="nav nav-treeview nav-child-indent">
+              <li class="nav-item">
+                <a href="/rooms" class="nav-link {{ ($currentpage === "Rooms" || $currentpage === "Room Detail") ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-video" style="margin-right: 10px"></i>
+                    <p>
+                      Rooms
+                    </p>
+                  </div>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ $currentpage === "Chat" ? "active" : ""}}">
+                  <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
+                    <p>
+                      Chat
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+        </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

@@ -33,21 +33,25 @@
                 &nbsp;&nbsp;<i class="fas fa-check" title="Mhp is approved" style="color: #099FD7;"></i>
               @endif
             </h4>
-            <p class="text-muted text-center">{{$mhp->email}}</p>
+            <h5 class="text-muted text-center">{{$mhp->email}}</h5>
+            <h5 class="text-muted text-center">{{$mhp->mobile_number}}</h5>
+
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>Followers</b> <a class="float-right">{{count($mhp->followers)}}</a>
+                <b>Followers</b> <a class="float-right"><span class="badge badge-primary">{{count($mhp->followers)}}</span></a>
               </li>
               <li class="list-group-item">
-                <b>Following</b> <a class="float-right">{{count($mhp->followings)}}</a>
+                <b>Following</b> <a class="float-right"><span class="badge badge-primary">{{count($mhp->followings)}}</span></a>
               </li>
               <li class="list-group-item">
                 <b>Rating</b> <a class="float-right">
-                  @if(count($mhp->rating) == 0)
-                    0
-                  @else
-                    {{$mhp->rating[0]->total_ratings/$mhp->rating[0]->number_of_raters}} &nbsp;/ &nbsp;<i class="fas fa-user" title="Rated users" ></i> {{$mhp->rating[0]->number_of_raters}}
-                  @endif
+                  <span class="badge badge-primary">
+                    @if(count($mhp->rating) == 0)
+                      0
+                    @else
+                      {{$mhp->rating[0]->total_ratings/$mhp->rating[0]->number_of_raters}} &nbsp;/ &nbsp;<i class="fas fa-user" title="Rated users" ></i> {{$mhp->rating[0]->number_of_raters}}
+                    @endif
+                  </span>
                 </a>
                 {{-- <b>Rating</b> <a class="float-right">{{$mhp->rating[0]->total_ratings/$mhp->rating[0]->number_of_raters}}</a> --}}
               </li>

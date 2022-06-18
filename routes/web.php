@@ -15,6 +15,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,6 @@ use App\Http\Controllers\CertificateController;
 //         return view('dashboard.index');
 //     });
 // });
-
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 //USERS ROUTES
@@ -114,6 +114,15 @@ Route::middleware('auth')->prefix('certificates')->group(function() {
     Route::get('/', [CertificateController::class,'index']);
     Route::post('/action', [CertificateController::class,'action']);
     Route::get('/open/{file}',[CertificateController::class,'open']);
+});
+
+//ROOMS ROUTES
+Route::middleware('auth')->prefix('rooms')->group(function() {
+    Route::get('/', [RoomController::class,'index']);
+    Route::get('/{id}', [RoomController::class,'show']);
+    Route::post('/delete', [RoomController::class,'delete']);
+    // Route::post('/action', [CertificateController::class,'action']);
+    // Route::get('/open/{file}',[CertificateController::class,'open']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
