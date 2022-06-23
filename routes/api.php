@@ -50,7 +50,7 @@ Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
     Route::get('/{id}', [FaqController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->prefix('categories')->group(function() {
+Route::prefix('categories')->group(function() {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('/{id}', [CategoryController::class, 'show']);
 });
