@@ -24,8 +24,8 @@ class AuthController extends Controller
             'password' => 'required|min:6',
             'bios'=> 'nullable|string',
             'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
-            "categories"    => "required|array|min:1",
-            "categories.*"  => "required|string|distinct|min:1",
+            "categories"    => "array|min:1|nullable",
+            "categories.*"  => "distinct|min:1",
         ]);
 
         if($validator->fails()){
@@ -46,9 +46,11 @@ class AuthController extends Controller
                 'bios' => $request->bios,
                 'password' => Hash::make($request->password),
             ]);
-            
-            $user->categories()->attach($request->categories);
 
+            if(count((array)$request->categories)) {
+                $user->categories()->attach($request->categories);
+            }
+            
             if($request->file('certificate') && $request->is_mhp == 1){
                 $path = $request->file('certificate')->store('public/certificate');
                 $file_name = explode("/", $path)[2];
@@ -74,8 +76,6 @@ class AuthController extends Controller
                     'categories' => $request->categories
                 ],200);
             }
-
-           
 
             $token = $user->createToken('auth_token')->plainTextToken;
         
