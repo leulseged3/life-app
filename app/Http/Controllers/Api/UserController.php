@@ -12,7 +12,7 @@ use App\Models\Follow;
 class UserController extends Controller
 {
     public function index(Request $request){
-        $mhps = User::where('is_mhp',1)->where('id','!=',$request->user()->id)->with(['rating','followers'])->get();
+        $mhps = User::where('is_mhp',1)->where('id','!=',$request->user()->id)->with(['rating','followers','categories'])->get();
         
         return response()->json($mhps, 200);
     }
@@ -37,7 +37,9 @@ class UserController extends Controller
             // 'mobile_number' => 'nullable|string|max:255',
             'password' => 'nullable|string|confirmed|min:6',
             "password_confirmation" => "nullable|string|min:6",
-            'bios'=> 'nullable|string'
+            'bios'=> 'nullable|string',
+            "categories"    => "array|min:1|nullable",
+            "categories.*"  => "distinct|min:1",
         ]);
 
         if($validator->fails()){
@@ -71,6 +73,11 @@ class UserController extends Controller
             }
             if($request->bios){
                 $user->bios = $request->bios;
+            }
+
+            if(count((array)$request->categories)) {
+                $user->categories()->detach($user->categories);
+                $user->categories()->attach($request->categories);
             }
 
             if($user->save()) {
