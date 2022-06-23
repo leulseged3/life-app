@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('owner')->get();
+        $articles = Article::with(['owner','categories'])->get();
         return response()->json($articles, 200);
     }
 
