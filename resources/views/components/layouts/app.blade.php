@@ -359,6 +359,19 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
+            <a href="/roles" class="nav-link {{ $currentpage === "Roles" ? "active" : ""}}">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                <p>
+                  Roles
+                  <!-- <i class="fas fa-angle-left right"></i> -->
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/profile" class="nav-link {{ $currentpage === "Admin Profile" ? "active" : "" }}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-user-circle" style="margin-right: 10px"></i>
