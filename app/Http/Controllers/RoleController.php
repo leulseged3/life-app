@@ -29,4 +29,13 @@ class RoleController extends Controller
 
         return redirect()->back()->with('message', 'Role is created successfully!');
     }
+
+    public function delete(Request $request) {
+       $role = Role::find($request->role_id);
+
+       if($role) {
+        $role->delete();
+        return redirect()->back()->with('message', 'Role is deleted successfully');
+       }
+    }
 }
