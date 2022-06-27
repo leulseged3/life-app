@@ -26,17 +26,21 @@
             <tr>
               <td>{{$account->name}}</td>
               <td>{{$account->email}}</td>
-              <td>{{$account->roles[0]->name}}</td>
+              @if (count($account->roles))
+                <td>{{$account->roles[0]->name}}</td>
+              @else
+                  <td>Has no role</td>
+              @endif
 
               <td class="d-flex" style="justify-content: space-around">
-                {{-- <a 
+                <a 
                   href="#" 
                   data-toggle="modal" 
                   data-target="#account-edit-modal"
                   data-account="{{$account}}"
                 >
                   <i class="fas fa-edit" title="Edit" ></i>
-                </a> --}}
+                </a>
                 <a 
                   href="#"
                   data-toggle="modal" 
@@ -55,6 +59,6 @@
       {{$accounts->links()}}
     </div>
   </div>
-  {{-- @include('accounts.edit') --}}
+  @include('accounts.edit')
   @include('accounts.delete')
 </x-layouts.app>
