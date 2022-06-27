@@ -152,6 +152,19 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
+            <a href="/roles" class="nav-link {{ $currentpage === "Roles" ? "active" : ""}}">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                <p>
+                  Roles
+                  <!-- <i class="fas fa-angle-left right"></i> -->
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
@@ -364,19 +377,6 @@ to get the desired effect
                 <i class="nav-icon fas fa-star" style="margin-right: 10px"></i>
                 <p>
                   Ratings
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/roles" class="nav-link {{ $currentpage === "Roles" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
-                <p>
-                  Roles
-                  <!-- <i class="fas fa-angle-left right"></i> -->
-                  <!-- <span class="badge badge-info right">6</span> -->
                 </p>
               </div>
             </a>

@@ -46,19 +46,11 @@
               </td>
               
               <td class="d-flex" style="justify-content: space-around">
-                {{-- <a 
-                  href="#" 
-                  data-toggle="modal" 
-                  data-target="#user-edit-modal"
-                  data-user="{{$role}}"
-                >
-                  <i class="fas fa-edit" title="Edit" ></i>
-                </a> --}}
                 <a 
                   href="#"
                   data-toggle="modal" 
-                  data-target="#user-delete-modal"
-                  data-user="{{$role}}"
+                  data-target="#role-delete-modal"
+                  data-role="{{$role}}"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>
@@ -66,21 +58,11 @@
           </tr>
           @endforeach
         </tbody>
-        {{-- <tfoot>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Username</th>
-          <th>Mobile No</th>
-          <th>Is MHP</th>
-        </tr>
-        </tfoot> --}}
       </table>
     </div>
     <div class="card-footer clearfix bg-white">
       {{$roles->links()}}
     </div>
   </div>
-  {{-- @include('users.delete') --}}
+  @include('roles.delete')
 </x-layouts.app>
