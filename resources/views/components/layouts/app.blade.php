@@ -141,6 +141,17 @@ to get the desired effect
           </li>
 
           <li class="nav-item">
+            <a href="/accounts" class="nav-link {{ $currentpage === "Accounts" ? "active" : ""}}">
+              <div class="d-flex align-items-center">
+                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                <p>
+                  Accounts
+                </p>
+              </div>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
               <div class="d-flex align-items-center">
                 <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
