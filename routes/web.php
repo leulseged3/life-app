@@ -17,6 +17,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +131,15 @@ Route::middleware('auth')->prefix('rooms')->group(function() {
 Route::middleware('auth')->prefix('roles')->group(function() {
     Route::get('/', [RoleController::class,'index']);
     Route::post('/create', [RoleController::class,'create']);
+    // Route::post('/delete', [RoleController::class,'delete']);
+    // Route::post('/action', [CertificateController::class,'action']);
+    // Route::get('/open/{file}',[CertificateController::class,'open']);
+});
+
+//ACCOUNTS ROUTES
+Route::middleware('auth')->prefix('accounts')->group(function() {
+    Route::get('/', [AccountController::class,'index']);
+    Route::post('/create', [AccountController::class,'create']);
     // Route::post('/delete', [RoleController::class,'delete']);
     // Route::post('/action', [CertificateController::class,'action']);
     // Route::get('/open/{file}',[CertificateController::class,'open']);
