@@ -46,6 +46,16 @@ class Admin extends Authenticatable
         return $this->morphMany(Article::class,'owner');
     }
 
+    /**
+     * The roles that belong to the Admin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     public function isSuperAdmin(): bool {
         return (bool) $this->is_super_admin;
     }
