@@ -54,4 +54,14 @@ class AccountController extends Controller
         }
         return $randomString;
     }
+
+    function delete(Request $request) {
+        $account = Admin::find($request->account_id);
+
+        if($account) {
+            $account->delete();
+            return redirect()->back()->with('message', 'Account is deleted successfully');
+        }
+        return redirect()->back();
+    }
 }

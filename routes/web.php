@@ -140,7 +140,7 @@ Route::middleware('auth')->prefix('roles')->group(function() {
 Route::middleware('auth')->prefix('accounts')->group(function() {
     Route::get('/', [AccountController::class,'index']);
     Route::post('/create', [AccountController::class,'create']);
-    // Route::post('/delete', [RoleController::class,'delete']);
+    Route::post('/delete', [AccountController::class,'delete']);
     // Route::post('/action', [CertificateController::class,'action']);
     // Route::get('/open/{file}',[CertificateController::class,'open']);
 });
