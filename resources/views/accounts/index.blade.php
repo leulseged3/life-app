@@ -29,14 +29,14 @@
               <td>{{$account->roles[0]->name}}</td>
 
               <td class="d-flex" style="justify-content: space-around">
-                <a 
+                {{-- <a 
                   href="#" 
                   data-toggle="modal" 
                   data-target="#account-edit-modal"
                   data-account="{{$account}}"
                 >
                   <i class="fas fa-edit" title="Edit" ></i>
-                </a>
+                </a> --}}
                 <a 
                   href="#"
                   data-toggle="modal" 
@@ -56,5 +56,5 @@
     </div>
   </div>
   {{-- @include('accounts.edit') --}}
-  {{-- @include('delete.delete') --}}
+  @include('accounts.delete')
 </x-layouts.app>
