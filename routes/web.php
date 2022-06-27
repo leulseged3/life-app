@@ -141,8 +141,7 @@ Route::middleware('auth')->prefix('accounts')->group(function() {
     Route::get('/', [AccountController::class,'index']);
     Route::post('/create', [AccountController::class,'create']);
     Route::post('/delete', [AccountController::class,'delete']);
-    // Route::post('/action', [CertificateController::class,'action']);
-    // Route::get('/open/{file}',[CertificateController::class,'open']);
+    Route::post('/edit', [AccountController::class,'update']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);

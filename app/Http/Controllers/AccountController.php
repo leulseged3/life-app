@@ -14,17 +14,18 @@ class AccountController extends Controller
 {
     public function index(){
         $accounts = Admin::where('id','!=', Auth::user()->id)->paginate(5);
+        // dd($accounts);
         return view('accounts.index')->with('accounts', $accounts);
     }
 
     public function create(Request $request){
-        // dd($request);
-        $generatedPassword = $this->generateRandomString();
         Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:admins',
             'role' => 'required|numeric'
         ])->validate();
+
+        $generatedPassword = $this->generateRandomString();
 
         $admin = new Admin;
         $admin->name = $request->name;
@@ -55,13 +56,32 @@ class AccountController extends Controller
         return $randomString;
     }
 
-    function delete(Request $request) {
+    public function delete(Request $request) {
         $account = Admin::find($request->account_id);
 
         if($account) {
             $account->delete();
             return redirect()->back()->with('message', 'Account is deleted successfully');
         }
+        return redirect()->back();
+    }
+
+    public function update(Request $request){
+        Validator::make($request->all(), [
+            'account_id' => 'required|numeric',
+            'role' => 'required|numeric'
+        ])->validate();
+        $admin = Admin::find($request->account_id);
+
+        if($admin) {
+            if(count($admin->roles)){
+                $admin->roles()->detach($admin->roles[0]->id);
+            }
+            $admin->roles()->attach($request->role);
+
+            return redirect()->back()->with('message','Role is changed Successfully');
+        }
+
         return redirect()->back();
     }
 }
