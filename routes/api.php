@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\InviteController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\SpecialityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,11 @@ Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
 Route::prefix('categories')->group(function() {
     Route::get('/', [CategoryController::class, 'index']);
     Route::get('/{id}', [CategoryController::class, 'show']);
+});
+
+Route::prefix('specialities')->group(function() {
+    Route::get('/', [SpecialityController::class, 'index']);
+    Route::get('/{id}', [SpecialityController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->prefix('follow')->group(function() {
