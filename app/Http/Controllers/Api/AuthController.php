@@ -26,59 +26,47 @@ class AuthController extends Controller
             'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
             "categories"    => "array|min:1|nullable",
             "categories.*"  => "distinct|min:1",
+            "specialities"    => "required_if:is_mhp, 1|array|min:1",
+            "specialities.*"  => "distinct|min:1",
         ]);
-
+         
         if($validator->fails()){
             $errors = $validator->errors();
             return response()->json([
                 'error' => $errors
             ], 400);
         }
+        // return response()->json(count((array)$request->categories), 200);
 
-        if ($validator->passes()) {
-            $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'username' => $request->username,
-                'mobile_number' => $request->mobile_number,
-                'is_mhp' => $request->is_mhp,
-                'bios' => $request->bios,
-                'password' => Hash::make($request->password),
-            ]);
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'mobile_number' => $request->mobile_number,
+            'is_mhp' => $request->is_mhp,
+            'bios' => $request->bios,
+            'password' => Hash::make($request->password),
+        ]);
 
-            if(count((array)$request->categories)) {
-                $user->categories()->attach($request->categories);
-            }
-            
-            if($request->file('certificate') && $request->is_mhp == 1){
-                $path = $request->file('certificate')->store('public/certificate');
-                $file_name = explode("/", $path)[2];
-                $ceritificate = new Certificate;
-                $ceritificate->user_id = $user->id;
-                $ceritificate->file = $file_name;
-                $ceritificate->save();
+        if(count((array)$request->categories) && $request->is_mhp == 0) {
+            $user->categories()->attach($request->categories);
+        }
 
-                $token = $user->createToken('auth_token')->plainTextToken;
+        if(count((array)$request->specialities) && $request->is_mhp == 1) {
+            $user->specialities()->attach($request->specialities);
+        }
         
-                return response()->json([
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'email' => $request->email,
-                    'username' => $request->username,
-                    'mobile_number' => $request->mobile_number,
-                    'is_mhp' => $request->is_mhp,
-                    'bios' => $request->bios,
-                    'certificate' => $file_name,
-                    'categories' => $request->categories,
-                    'access_token' => $token,
-                    'token_type' => 'Bearer',
-                    'categories' => $request->categories
-                ],200);
-            }
+        if($request->hasfile('certificate') && $request->is_mhp == 1){
+            $path = $request->file('certificate')->store('public/certificate');
+            $file_name = explode("/", $path)[2];
+            $ceritificate = new Certificate;
+            $ceritificate->user_id = $user->id;
+            $ceritificate->file = $file_name;
+            $ceritificate->save();
 
             $token = $user->createToken('auth_token')->plainTextToken;
-        
+    
             return response()->json([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -87,11 +75,29 @@ class AuthController extends Controller
                 'mobile_number' => $request->mobile_number,
                 'is_mhp' => $request->is_mhp,
                 'bios' => $request->bios,
+                'certificate' => $file_name,
+                'categories' => $request->categories,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'categories' => $user->categories
+                // 'categories' => $request->categories,
+                'specialities' => $request->specialities
             ],200);
         }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+    
+        return response()->json([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'mobile_number' => $request->mobile_number,
+            'is_mhp' => $request->is_mhp,
+            'bios' => $request->bios,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'categories' => $user->categories
+        ],200);
     }
 
     public function login(Request $request) {
