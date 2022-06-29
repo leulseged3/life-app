@@ -28,6 +28,7 @@ class AuthController extends Controller
             "categories.*"  => "distinct|min:1",
             "specialities"    => "required_if:is_mhp, 1|array|min:1",
             "specialities.*"  => "distinct|min:1",
+            'profile_pic' => 'required_if:is_mhp, 1|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
          
         if($validator->fails()){
@@ -37,6 +38,12 @@ class AuthController extends Controller
             ], 400);
         }
         // return response()->json(count((array)$request->categories), 200);
+        $profile_pic_name = "";
+
+        if($request->hasfile('profile_pic') && $request->is_mhp == 1){
+            $path = $request->file('profile_pic')->store('public/profile_pics');
+            $profile_pic_name = explode("/", $path)[2];
+        }
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -47,6 +54,7 @@ class AuthController extends Controller
             'is_mhp' => $request->is_mhp,
             'bios' => $request->bios,
             'password' => Hash::make($request->password),
+            'profile_pic' => $profile_pic_name
         ]);
 
         if(count((array)$request->categories) && $request->is_mhp == 0) {
@@ -56,6 +64,8 @@ class AuthController extends Controller
         if(count((array)$request->specialities) && $request->is_mhp == 1) {
             $user->specialities()->attach($request->specialities);
         }
+
+      
         
         if($request->hasfile('certificate') && $request->is_mhp == 1){
             $path = $request->file('certificate')->store('public/certificate');
@@ -80,7 +90,8 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 // 'categories' => $request->categories,
-                'specialities' => $request->specialities
+                'specialities' => $request->specialities,
+                'profile_pic' => $profile_pic_name
             ],200);
         }
 
@@ -96,7 +107,8 @@ class AuthController extends Controller
             'bios' => $request->bios,
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'categories' => $user->categories
+            'categories' => $user->categories,
+            'profile_pic' => $profile_pic_name
         ],200);
     }
 
