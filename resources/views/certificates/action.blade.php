@@ -6,6 +6,7 @@
       $('#certificate_action_title').text(status + " certificate");
       $('#certificate_id').val(certificate.id);
       $('#certificate_status').val(status);
+      $('#user_id').val(certificate.user_id);
 
     });
   </script>
@@ -23,6 +24,8 @@
         @csrf
         <input type="hidden" id="certificate_id" name="id"/>
         <input type="hidden" id="certificate_status" name="status"/>
+        <input type="hidden" id="user_id" name="user_id"/>
+
         <div class="modal-body">
           <p>Are you sure?</p>
         </div>

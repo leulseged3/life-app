@@ -21,20 +21,23 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($certificates as $certificate)
+          @foreach($mhps as $mhp)
             <tr>
-              <td><a href="/mhps/{{$certificate->user->id}}">{{$certificate->user->username}}</a></td>
+              <td><a href="/mhps/{{$mhp->id}}">{{$mhp->username}}</a></td>
+              {{-- <td>{{$mhp->certificates}}</td> --}}
               <td>
-                <a 
-                  href="/certificates/open/{{$certificate->file}}"
-                  style="margin-inline: 15px;"
-                  target="_blank"
-                >
-                Open File
-                <i class="fas fa-file" title="File" style="margin-left: 10px;"></i>
-              </a>
+                @foreach ($mhp->certificates as $certificate)
+                  <a 
+                    href="/certificates/open/{{$certificate->file}}"
+                    style="margin-inline: 15px;"
+                    target="_blank"
+                  >
+                    Open File
+                    <i class="fas fa-file" title="File" style="margin-left: 10px;"></i>
+                  </a>
+                @endforeach
               </td>
-              <td>{{$certificate->status}}</td>
+              <td>{{$mhp->status}}</td>
 
               <td class="d-flex" style="justify-content: space-around">
                 <a 
@@ -63,7 +66,7 @@
       </table>
     </div>
     <div class="card-footer clearfix bg-white">
-      {{$certificates->links()}}
+      {{$mhps->links()}}
     </div>
   </div>
   @include('certificates.action')

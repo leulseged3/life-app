@@ -29,7 +29,7 @@
            
             <h4 class="profile-username text-center" style="font-size: 18px">
               {{"@"}}{{$mhp->username}}
-              @if ($mhp->certificate->status == "approved")
+              @if ($mhp->status == "approved")
                 &nbsp;&nbsp;<i class="fas fa-check" title="Mhp is approved" style="color: #099FD7;"></i>
               @endif
             </h4>
