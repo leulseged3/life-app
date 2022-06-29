@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Certificate;
+use App\Models\Verification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserMail;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -41,10 +45,11 @@ class AuthController extends Controller
                 'error' => $errors
             ], 400);
         }
-        // return response()->json($request, 200);
-
-        // return response()->json(count((array)$request->categories), 200);
+ 
         $profile_pic_name = "";
+
+        $generatedVerificationCode = rand(1231,7879);
+
 
         if($request->hasfile('profile_pic') && $request->is_mhp == 1){
             $path = $request->file('profile_pic')->store('public/profile_pics');
@@ -71,8 +76,6 @@ class AuthController extends Controller
             $user->specialities()->attach($request->specialities);
         }
 
-      
-        
         if($request->hasfile('certificates') && $request->is_mhp == 1){
             foreach($request->file('certificates') as $file)
             {
@@ -88,10 +91,17 @@ class AuthController extends Controller
                 $ceritificate->file = $file_name;
                 $ceritificate->save();
             }
-           
+
+            $verification = new Verification;
+            $verification->code = $generatedVerificationCode;
+            $user->verifications()->save($verification);
+            
+            $info['name'] = $request->first_name;
+            $info['verification'] = $generatedVerificationCode;
 
             $token = $user->createToken('auth_token')->plainTextToken;
-    
+            Mail::to($user->email)->send(new UserMail($info));
+
             return response()->json([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -111,7 +121,8 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-    
+        Mail::to($user->email)->send(new UserMail($info));
+
         return response()->json([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -149,6 +160,44 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'categories' => $user->categories
+        ], 200);
+    }
+
+    public function verify(Request $request){
+        if($request->user()->verifications){
+            $verification = $request->user()->verifications[count($request->user()->verifications)-1];
+            if($request->verification_code === $verification->code) {
+                $updateUser = User::find($request->user()->id);
+                $updateUser->email_verified_at = Carbon::now();
+                $updateUser->save();
+                return response()->json([
+                    'message' => 'Email is verified successfully'
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Incorrect Verification code'
+                ], 400);
+            }
+        }
+        return response()->json([
+            'message' => 'Email is not verified.try again'
+        ], 400);
+    }
+
+    public function resend(Request $request){
+        $generatedVerificationCode = rand(1231,7879);
+        $user = $request->user();
+
+        $verification = new Verification;
+        $verification->code = $generatedVerificationCode;
+        $user->verifications()->save($verification);
+
+        $info['name'] = $user->first_name;
+        $info['verification'] = $generatedVerificationCode;
+
+        Mail::to($user->email)->send(new UserMail($info));
+        return response()->json([
+            'message'=>'Vrification code is sent.'
         ], 200);
     }
 }

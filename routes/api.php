@@ -29,8 +29,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', [AuthController::class, 'register'])->middleware('log.route');
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//EMAIL ROUTES
+Route::middleware('auth:sanctum')->prefix('email')->group(function() {
+    Route::post('/verify', [AuthController::class, 'verify']);
+    Route::post('/resend', [AuthController::class, 'resend']);
+});
 
 //ROOMS ROUTES
 Route::middleware('auth:sanctum')->prefix('rooms')->group(function() {
@@ -95,3 +101,4 @@ Route::middleware('auth:sanctum')->prefix('tickets')->group(function() {
     Route::post('/upload', [TicketController::class, 'uploadProfile']);
     Route::get('/{id}', [TicketController::class, 'show']);
 });
+
