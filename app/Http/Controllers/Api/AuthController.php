@@ -181,7 +181,7 @@ class AuthController extends Controller
         }
         return response()->json([
             'message' => 'Email is not verified.try again'
-        ], 400);
+        ], 500);
     }
 
     public function resend(Request $request){
@@ -197,7 +197,81 @@ class AuthController extends Controller
 
         Mail::to($user->email)->send(new UserMail($info));
         return response()->json([
-            'message'=>'Vrification code is sent.'
+            'message'=>'verification code is sent.'
         ], 200);
+    }
+
+    public function reset(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return response()->json([
+                'error' => $errors
+            ], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user){
+            $generatedVerificationCode = rand(1231,7879);
+
+            $verification = new Verification;
+            $verification->code = $generatedVerificationCode;
+            $user->verifications()->save($verification);
+            
+            $info['name'] = '';
+            $info['verification'] = $generatedVerificationCode;
+    
+            Mail::to($request->email)->send(new UserMail($info));
+    
+            return response()->json([
+                'message'=>'verification code is sent.'
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'code is not sent.try again'
+        ], 500);
+    }
+
+    public function newPassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6',
+            'verification_code' => 'required'
+        ]);
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return response()->json([
+                'error' => $errors
+            ], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user) {
+            if($user->verifications){
+                $verification = $user->verifications[count($user->verifications)-1];
+                if($request->verification_code === $verification->code) {
+                    $user->password = Hash::make($request->password);
+                  
+                    if($user->save()){
+                        return response()->json([
+                            'message' => 'password is changed successfully'
+                        ], 200);
+                    }
+                } else {
+                    return response()->json([
+                        'message' => 'Incorrect Verification code'
+                    ], 400);
+                }
+            }
+        }
+        return response()->json([
+            'message' => 'password is not changed.try again'
+        ], 500);
     }
 }

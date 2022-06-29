@@ -38,6 +38,12 @@ Route::middleware('auth:sanctum')->prefix('email')->group(function() {
     Route::post('/resend', [AuthController::class, 'resend']);
 });
 
+//PASSWORD RESET
+Route::prefix('password')->group(function() {
+    Route::post('/reset', [AuthController::class, 'reset']);
+    Route::post('/new', [AuthController::class, 'newPassword']);
+});
+
 //ROOMS ROUTES
 Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function() {
     Route::post('/', [RoomController::class, 'create']);
