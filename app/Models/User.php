@@ -69,6 +69,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Speciality::class);
    }
 
+   public function verifications(){
+    return $this->hasMany(Verification::class);
+   }
+
    /**
     * The roles that belong to the User
     *
