@@ -12,7 +12,8 @@ use App\Models\Certificate;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         //is mhp should be numeric
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
@@ -20,9 +21,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'username' => 'required|string|unique:users|max:255',
             'mobile_number' => 'required|string|unique:users|max:255',
-            'is_mhp'=>'required|numeric',
+            'is_mhp' => 'required|numeric',
             'password' => 'required|min:6',
-            'bios'=> 'nullable|string',
+            'bios' => 'nullable|string',
             'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
             "categories"    => "array|min:1|nullable",
             "categories.*"  => "distinct|min:1",
@@ -112,15 +113,16 @@ class AuthController extends Controller
         ],200);
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $user = User::where('email', $request->email)->first();
- 
+
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'The provided credentials are incorrect.'
             ], 400);
         }
-        
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -133,6 +135,6 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'categories' => $user->categories
-        ],200);
+        ], 200);
     }
 }

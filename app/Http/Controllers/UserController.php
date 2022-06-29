@@ -4,15 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     function index(){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_USER')){
+            return redirect()->back();
+        }
+
         $users = User::where('is_mhp',0)->paginate(5);
         return view('users.index')->with('users',$users);
     }
 
     function update(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'UPDATE_USER')){
+            return redirect()->back();
+        }
+
         //send validation error via session or other way or $errors
         $user = User::find($request->user_id);
         if($request->first_name) {
@@ -38,6 +61,17 @@ class UserController extends Controller
     }
 
     function delete(Request $request){
+        $permissions = [];
+        
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'DELETE_USER')){
+            return redirect()->back();
+        }
+
         $user = User::find($request->user_id);
         if($user->delete()){
             return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');

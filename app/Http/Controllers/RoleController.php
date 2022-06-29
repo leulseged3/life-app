@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
     public function index(){
+        if (!Auth::user()->is_super_admin) return redirect()->back();
+
         $roles = Role::paginate(5);
 
         return view('roles.index')->with('roles', $roles);
     }
 
     public function create(Request $request){
+        if (!Auth::user()->is_super_admin) return redirect()->back();
+
         Validator::make($request->all(), [
             'name' => 'required|string|unique:roles',
             "permissions"    => "required|array|min:1",
@@ -31,6 +36,8 @@ class RoleController extends Controller
     }
 
     public function delete(Request $request) {
+        if (!Auth::user()->is_super_admin) return redirect()->back();
+
        $role = Role::find($request->role_id);
 
        if($role) {

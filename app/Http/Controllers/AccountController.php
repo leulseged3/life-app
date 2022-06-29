@@ -12,13 +12,16 @@ use App\Mail\AdminMail;
 
 class AccountController extends Controller
 {
-    public function index(){
-        $accounts = Admin::where('id','!=', Auth::user()->id)->paginate(5);
-        // dd($accounts);
+    public function index()
+    {
+        if (!Auth::user()->is_super_admin) return redirect()->back();
+        $accounts = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
         return view('accounts.index')->with('accounts', $accounts);
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
+        if (!Auth::user()->is_super_admin) return redirect()->back();
         Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:admins',
@@ -46,7 +49,8 @@ class AccountController extends Controller
         return redirect()->back()->with('message', 'Admin created Successfully');
     }
 
-    function generateRandomString($length = 10) {
+    function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -56,30 +60,34 @@ class AccountController extends Controller
         return $randomString;
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
+        if (!Auth::user()->is_super_admin) return redirect()->back();
         $account = Admin::find($request->account_id);
 
-        if($account) {
+        if ($account) {
             $account->delete();
             return redirect()->back()->with('message', 'Account is deleted successfully');
         }
         return redirect()->back();
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
+        if (!Auth::user()->is_super_admin) return redirect()->back();
         Validator::make($request->all(), [
             'account_id' => 'required|numeric',
             'role' => 'required|numeric'
         ])->validate();
         $admin = Admin::find($request->account_id);
 
-        if($admin) {
-            if(count($admin->roles)){
+        if ($admin) {
+            if (count($admin->roles)) {
                 $admin->roles()->detach($admin->roles[0]->id);
             }
             $admin->roles()->attach($request->role);
 
-            return redirect()->back()->with('message','Role is changed Successfully');
+            return redirect()->back()->with('message', 'Role is changed Successfully');
         }
 
         return redirect()->back();

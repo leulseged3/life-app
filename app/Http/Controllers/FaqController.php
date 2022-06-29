@@ -6,15 +6,38 @@ use Illuminate\Http\Request;
 use App\Models\Faq;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class FaqController extends Controller
 {
     public function index(){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_FAQ')){
+            return redirect()->back();
+        }
+
         $faqs = Faq::paginate(5);
         return view('faqs.index')->with('faqs', $faqs);
     }
 
     public function create(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'CREATE_FAQ')){
+            return redirect()->back();
+        }
+
         Validator::make($request->all(), [
             'question' => 'required',
             'answer' => 'required',
@@ -34,7 +57,17 @@ class FaqController extends Controller
     }
 
     public function update(Request $request){
-        
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'UPDATE_FAQ')){
+            return redirect()->back();
+        }
+
         Validator::make($request->all(), [
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ])->validate();
@@ -61,6 +94,17 @@ class FaqController extends Controller
     }
 
     public function delete(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'DELETE_FAQ')){
+            return redirect()->back();
+        }
+
         $faq = Faq::find($request->faq_id);
         if($faq->delete()) {
             return redirect()->back()->with('message','FAQ deleted successfully!');

@@ -4,16 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class MhpController extends Controller
 {
     function index(){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_MHP')){
+            return redirect()->back();
+        }
+
         $mhps = User::where('is_mhp', 1)->paginate(5);
 
         return view('mhps.index')->with('mhps',$mhps);
     }
 
     function update(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'UPDATE_MHP')){
+            return redirect()->back();
+        }
+
         //send validation error via session or other way or $errors
         $user = User::find($request->user_id);
         if($request->first_name) {
@@ -38,6 +61,17 @@ class MhpController extends Controller
         }
     }
     function delete(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'DELETE_MHP')){
+            return redirect()->back();
+        }
+
         $user = User::find($request->user_id);
    
         if($user->delete()){
@@ -48,6 +82,17 @@ class MhpController extends Controller
     }
 
     function show($id){
+        $permissions = [];
+        
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_MHP')){
+            return redirect()->back();
+        }
+
         $mhp = User::find($id);
         return view('mhps.detail')->with('mhp', $mhp);
     }

@@ -12,17 +12,50 @@ use App\Models\Article;
 class ArticleController extends Controller
 {
     public function index(){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_ARTICLE')){
+            return redirect()->back();
+        }
+
         $articles = Article::where('status','approved')->paginate(5);
 
         return view('articles.index')->with('articles', $articles);
     }
 
     public function pendingArticles(){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_ARTICLE')){
+            return redirect()->back();
+        }
+
         $articles = Article::where('status','pending')->paginate(5);
         return view('articles.pending')->with('articles', $articles);
     }
 
     public function approve(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'APPROVE_ARTICLE')){
+            return redirect()->back();
+        }
+
         $article = Article::find($request->id);
 
         if($article) {
@@ -34,6 +67,17 @@ class ArticleController extends Controller
     }
 
     public function create(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'CREATE_ARTICLE')){
+            return redirect()->back();
+        }
+
         Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required',
@@ -58,6 +102,17 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'UPDATE_ARTICLE')){
+            return redirect()->back();
+        }
+
         Validator::make($request->all(), [
             'title' => 'string',
             'feature_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -89,6 +144,17 @@ class ArticleController extends Controller
     }
 
     public function delete(Request $request){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'DELETE_ARTICLE')){
+            return redirect()->back();
+        }
+
         $article = Article::find($request->article_id);
 
         if($article->delete()){
@@ -99,6 +165,17 @@ class ArticleController extends Controller
     }
 
     public function detail(Request $request, $id){
+        $permissions = [];
+
+        if(Auth::user()->is_super_admin) {
+            $permissions = ['IS_SUPER_ADMIN'];
+        } else if(count(Auth::user()->roles)) {
+            $permissions = Auth::user()->roles[0]->permissions;
+        }
+        if(!user_is_authorized($permissions, 'VIEW_ARTICLE')){
+            return redirect()->back();
+        }
+
         $article = Article::find($id);
         if($article) {
             return view('articles.detail')->with('article', $article);
