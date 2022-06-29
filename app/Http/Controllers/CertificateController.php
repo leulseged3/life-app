@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Certificate;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class CertificateController extends Controller
 {
@@ -19,9 +20,9 @@ class CertificateController extends Controller
         if(!user_is_authorized($permissions, 'VIEW_CERTIFICATE')){
             return redirect()->back();
         }
+        $mhps = User::where('is_mhp', 1)->paginate(5);
 
-        $certificates = Certificate::paginate(5);
-        return view('certificates.index')->with('certificates',$certificates);
+        return view('certificates.index')->with('mhps',$mhps);
     }
 
     public function open($file){
@@ -47,21 +48,23 @@ class CertificateController extends Controller
         } else if(count(Auth::user()->roles)) {
             $permissions = Auth::user()->roles[0]->permissions;
         }
+
         if(!user_is_authorized($permissions, 'APPROVE_REJECT_CERTIFICATE')){
             return redirect()->back();
         }
 
-        $certificate = Certificate::find($request->id);
+        $mhp = User::find($request->user_id);
 
-        if($certificate){
+        if($mhp) {
             if($request->status == "approve") {
-                $certificate->status = "approved";
+                $mhp->status = "approved";
             }
 
             if($request->status == "reject") {
-                $certificate->status = "rejected";         
-            }                
-            $certificate->save();
+                $mhp->status = "rejected";         
+            }      
+
+            $mhp->save();
             return redirect()->back()->with('message', 'certificate is '.$request->status.' successfully!');
         }
     }

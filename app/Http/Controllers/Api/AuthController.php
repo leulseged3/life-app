@@ -24,13 +24,16 @@ class AuthController extends Controller
             'is_mhp' => 'required|numeric',
             'password' => 'required|min:6',
             'bios' => 'nullable|string',
-            'certificate' => 'required_if:is_mhp, 1|mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
+            'bios'=> 'nullable|string',
+            'certificates' => 'required_if:is_mhp, 1|array|min:1',
+            'certificates.*' => 'mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
             "categories"    => "array|min:1|nullable",
             "categories.*"  => "distinct|min:1",
             "specialities"    => "required_if:is_mhp, 1|array|min:1",
             "specialities.*"  => "distinct|min:1",
             'profile_pic' => 'required_if:is_mhp, 1|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+
          
         if($validator->fails()){
             $errors = $validator->errors();
@@ -38,6 +41,8 @@ class AuthController extends Controller
                 'error' => $errors
             ], 400);
         }
+        // return response()->json($request, 200);
+
         // return response()->json(count((array)$request->categories), 200);
         $profile_pic_name = "";
 
@@ -68,13 +73,22 @@ class AuthController extends Controller
 
       
         
-        if($request->hasfile('certificate') && $request->is_mhp == 1){
-            $path = $request->file('certificate')->store('public/certificate');
-            $file_name = explode("/", $path)[2];
-            $ceritificate = new Certificate;
-            $ceritificate->user_id = $user->id;
-            $ceritificate->file = $file_name;
-            $ceritificate->save();
+        if($request->hasfile('certificates') && $request->is_mhp == 1){
+            foreach($request->file('certificates') as $file)
+            {
+                // $name = time().'.'.$file->extension();
+                // $file->move(public_path().'/files/', $name);  
+                // $data[] = $name;  
+                // $path = $request->file('certificate')->store('public/certificate');
+                $path = $file->store('public/certificate');
+                
+                $file_name = explode("/", $path)[2];
+                $ceritificate = new Certificate;
+                $ceritificate->user_id = $user->id;
+                $ceritificate->file = $file_name;
+                $ceritificate->save();
+            }
+           
 
             $token = $user->createToken('auth_token')->plainTextToken;
     
@@ -86,7 +100,7 @@ class AuthController extends Controller
                 'mobile_number' => $request->mobile_number,
                 'is_mhp' => $request->is_mhp,
                 'bios' => $request->bios,
-                'certificate' => $file_name,
+                'certificates' => $user->certificates,
                 'categories' => $request->categories,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
