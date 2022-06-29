@@ -39,20 +39,20 @@ Route::middleware('auth:sanctum')->prefix('email')->group(function() {
 });
 
 //ROOMS ROUTES
-Route::middleware('auth:sanctum')->prefix('rooms')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function() {
     Route::post('/', [RoomController::class, 'create']);
     Route::get('/', [RoomController::class, 'index']);
     Route::post('/toggle', [RoomController::class, 'toggle']);
 });
 
-Route::middleware('auth:sanctum')->prefix('articles')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('articles')->group(function() {
     Route::get('/', [ArticleController::class, 'index']);
     Route::get('/{id}', [ArticleController::class, 'show']);
     Route::post('/', [ArticleController::class, 'create']);
     Route::delete('/{id}', [ArticleController::class, 'delete']);
 });
 
-Route::middleware('auth:sanctum')->prefix('faqs')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('faqs')->group(function() {
     Route::get('/', [FaqController::class, 'index']);
     Route::get('/{id}', [FaqController::class, 'show']);
 });
@@ -67,35 +67,35 @@ Route::prefix('specialities')->group(function() {
     Route::get('/{id}', [SpecialityController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->prefix('follow')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('follow')->group(function() {
     Route::get('/followers', [FollowController::class, 'followers']);
     Route::get('/followings', [FollowController::class, 'followings']);
     Route::get('/{id}', [FollowController::class, 'toggleFollower']);
 });
 
-Route::middleware('auth:sanctum')->prefix('invite')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('invite')->group(function() {
     Route::post('/', [InviteController::class, 'create']);
     Route::get('/', [InviteController::class, 'index']);
     Route::get('/{id}', [InviteController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->prefix('ratings')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('ratings')->group(function() {
     Route::get('/', [RatingController::class, 'index']);
     Route::post('/', [RatingController::class, 'create']);
     Route::get('/{id}', [RatingController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->prefix('profile')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('profile')->group(function() {
     Route::patch('/', [UserController::class, 'update']);
     Route::post('/upload', [UserController::class, 'uploadProfile']);
 });
 
-Route::middleware('auth:sanctum')->prefix('users')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('users')->group(function() {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/{id}', [UserController::class, 'show']);
 });
 
-Route::middleware('auth:sanctum')->prefix('tickets')->group(function() {
+Route::middleware(['auth:sanctum','verified'])->prefix('tickets')->group(function() {
     Route::get('/', [TicketController::class, 'index']);
     Route::post('/', [TicketController::class, 'create']);
     Route::post('/upload', [TicketController::class, 'uploadProfile']);
