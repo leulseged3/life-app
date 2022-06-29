@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedTinyInteger('is_mhp')->default(0);
+            $table->string('status')->default('pending');
             // $table->rememberToken();
             $table->timestamps();
         });

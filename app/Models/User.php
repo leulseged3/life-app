@@ -57,8 +57,8 @@ class User extends Authenticatable
        return $this->hasMany(Totalrating::class);
    }
 
-   public function certificate(){
-        return $this->hasOne(Certificate::class);
+   public function certificates(){
+        return $this->hasMany(Certificate::class);
    }
 
    public function categories(){
