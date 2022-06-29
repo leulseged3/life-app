@@ -1,3 +1,12 @@
+@php
+    $permissions = [];
+
+    if(Auth::user()->is_super_admin) {
+      $permissions = ['IS_SUPER_ADMIN'];
+    } else if(count(Auth::user()->roles)) {
+      $permissions = Auth::user()->roles[0]->permissions;
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,44 +148,47 @@ to get the desired effect
               </p>
             </a>
           </li>
+          
+          @if (Auth::user()->is_super_admin)
+            <li class="nav-item">
+              <a href="/accounts" class="nav-link {{ $currentpage === "Accounts" ? "active" : ""}}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                  <p>
+                    Accounts
+                  </p>
+                </div>
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a href="/accounts" class="nav-link {{ $currentpage === "Accounts" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
-                <p>
-                  Accounts
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/roles" class="nav-link {{ $currentpage === "Roles" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
-                <p>
-                  Roles
-                  <!-- <i class="fas fa-angle-left right"></i> -->
-                  <!-- <span class="badge badge-info right">6</span> -->
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
-                <p>
-                  Users
-                  <!-- <i class="fas fa-angle-left right"></i> -->
-                  <!-- <span class="badge badge-info right">6</span> -->
-                </p>
-              </div>
-            </a>
-          </li>
-          {{-- {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates") ? "active" : ""}} --}}
+            <li class="nav-item">
+              <a href="/roles" class="nav-link {{ $currentpage === "Roles" ? "active" : ""}}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                  <p>
+                    Roles
+                    <!-- <i class="fas fa-angle-left right"></i> -->
+                    <!-- <span class="badge badge-info right">6</span> -->
+                  </p>
+                </div>
+              </a>
+            </li>  
+          @endif
+          @if (user_is_authorized($permissions, 'VIEW_USER'))
+            <li class="nav-item">
+              <a href="/users" class="nav-link {{ $currentpage === "Users" ? "active" : ""}}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-users" style="margin-right: 10px"></i>
+                  <p>
+                    Users
+                    <!-- <i class="fas fa-angle-left right"></i> -->
+                    <!-- <span class="badge badge-info right">6</span> -->
+                  </p>
+                </div>
+              </a>
+            </li>
+          @endif
+          @if (user_is_authorized($permissions, 'VIEW_MHP'))
           <li class="nav-item {{ ($currentpage === "Medical Health Professionals" || $currentpage === "Certificates" || $currentpage === "MHP Details") ? "menu-open" : ""}}"">
             <a href="/mhps" class="nav-link">
               <div class="d-flex align-items-center">
@@ -199,156 +211,170 @@ to get the desired effect
                   </div>
                 </a>
               </li>
-
-              <li class="nav-item">
-                <a href="/certificates" class="nav-link {{ $currentpage === "Certificates" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                    <i class="nav-icon fas fa-file" style="margin-right: 10px"></i>
-                    <p>
-                      Certificates
-                      <!-- <i class="right fas fa-angle-left"></i> -->
-                    </p>
-                  </div>
-                </a>
-              </li>
+              @if (user_is_authorized($permissions, 'VIEW_CERTIFICATE'))
+                <li class="nav-item">
+                  <a href="/certificates" class="nav-link {{ $currentpage === "Certificates" ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                      <i class="nav-icon fas fa-file" style="margin-right: 10px"></i>
+                      <p>
+                        Certificates
+                        <!-- <i class="right fas fa-angle-left"></i> -->
+                      </p>
+                    </div>
+                  </a>
+                </li>
+              @endif
             </ul>
           </li>
-
-          <li class="nav-item 
-            {{ ($currentpage === "Categories" || $currentpage === "Specialities") ? "menu-open" : ""}}"
-          >
-            <a href="/categories" class="nav-link">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
-                <p>
-                  Categories & Specialities
-                </p>
-                {{-- <i class="right fas fa-angle-left"></i> --}}
-              </div>
-            </a>
-            <ul class="nav nav-treeview nav-child-indent">
-              <li class="nav-item">
-                <a href="/categories" class="nav-link {{ $currentpage === "Categories" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
+          @endif
+          @if (user_is_authorized($permissions, 'VIEW_CATEGORY') || user_is_authorized($permissions, 'VIEW_SPECIALITY'))
+            <li class="nav-item 
+              {{ ($currentpage === "Categories" || $currentpage === "Specialities") ? "menu-open" : ""}}"
+            >
+              <a href="/categories" class="nav-link">
+                <div class="d-flex align-items-center">
                   <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
                   <p>
-                    Categories
-                    <!-- <i class="right fas fa-angle-left"></i> -->
+                    Categories & Specialities
                   </p>
-                  </div>
-                </a>
-              </li>
+                  {{-- <i class="right fas fa-angle-left"></i> --}}
+                </div>
+              </a>
+              <ul class="nav nav-treeview nav-child-indent">
+                @if (user_is_authorized($permissions, 'VIEW_CATEGORY'))
+                  <li class="nav-item">
+                    <a href="/categories" class="nav-link {{ $currentpage === "Categories" ? "active" : ""}}">
+                      <div class="d-flex align-items-center">
+                      <i class="nav-icon fas fa-list-alt" style="margin-right: 10px"></i>
+                      <p>
+                        Categories
+                        <!-- <i class="right fas fa-angle-left"></i> -->
+                      </p>
+                      </div>
+                    </a>
+                  </li>
+                @endif
 
-              <li class="nav-item">
-                <a href="/specialities" class="nav-link {{ $currentpage === "Specialities" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                @if (user_is_authorized($permissions, 'VIEW_SPECIALITY'))
+                <li class="nav-item">
+                  <a href="/specialities" class="nav-link {{ $currentpage === "Specialities" ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-user-md" style="margin-right: 10px"></i>
+                    <p>
+                      Specialities
+                      <!-- <i class="right fas fa-angle-left"></i> -->
+                    </p>
+                    </div>
+                  </a>
+                </li>
+                @endif
+              </ul>
+            </li>
+          @endif
+        
+          @if (user_is_authorized($permissions, 'VIEW_ARTICLE'))
+            <li 
+              class="nav-item
+              {{ ($currentpage === "Articles" || $currentpage === "Pending Articles" || $currentpage === "Add Article" || $currentpage === "Article Detail") ? "menu-open" : ""}}"
+            >
+              <a href="#" class="nav-link">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-rss" style="margin-right: 10px"></i>
                   <p>
-                    Specialities
-                    <!-- <i class="right fas fa-angle-left"></i> -->
+                    Resources
                   </p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li 
+                </div>
+              </a>
+              <ul class="nav nav-treeview nav-child-indent">
+                <li class="nav-item">
+                  <a href="/articles" class="nav-link {{ ($currentpage === "Articles" || $currentpage === "Article Detail") ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-newspaper" style="margin-right: 10px"></i>
+                      <p>
+                        Articles
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a href="/articles/pending" class="nav-link {{ $currentpage === "Pending Articles" ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-spinner" style="margin-right: 10px"></i>
+                      <p>
+                        Pending Articles
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                @if (user_is_authorized($permissions, 'CREATE_ARTICLE'))
+                  <li class="nav-item">
+                    <a href="/articles/add" class="nav-link {{ $currentpage === "Add Article" ? "active" : ""}}">
+                      <div class="d-flex align-items-center">
+                      <i class="nav-icon fas fa-plus" style="margin-right: 10px"></i>
+                        <p>
+                          Add Article
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+                @endif
+              </ul>
+            </li>
+          @endif
+        
+          @if (user_is_authorized($permissions, 'VIEW_TICKET'))
+            <li class="nav-item">
+              <a href="/tickets" class="nav-link {{ $currentpage === "Tickets Raised" ? "active" : ""}}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-ticket-alt" style="margin-right: 10px"></i>
+                  <p>
+                    Tickets Raised
+                  </p>
+                </div>
+              </a>
+            </li>
+          @endif
+         
+          @if (user_is_authorized($permissions, 'VIEW_ROOM'))
+            <li 
             class="nav-item
-            {{ ($currentpage === "Articles" || $currentpage === "Pending Articles" || $currentpage === "Add Article" || $currentpage === "Article Detail") ? "menu-open" : ""}}"
-          >
-            <a href="#" class="nav-link">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-rss" style="margin-right: 10px"></i>
-                <p>
-                  Resources
-                </p>
-              </div>
-            </a>
-            <ul class="nav nav-treeview nav-child-indent">
-              <li class="nav-item">
-                <a href="/articles" class="nav-link {{ ($currentpage === "Articles" || $currentpage === "Article Detail") ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-newspaper" style="margin-right: 10px"></i>
-                    <p>
-                      Articles
-                    </p>
-                  </div>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="/articles/pending" class="nav-link {{ $currentpage === "Pending Articles" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-spinner" style="margin-right: 10px"></i>
-                    <p>
-                      Pending Articles
-                    </p>
-                  </div>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="/articles/add" class="nav-link {{ $currentpage === "Add Article" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-plus" style="margin-right: 10px"></i>
-                    <p>
-                      Add Article
-                    </p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a href="/tickets" class="nav-link {{ $currentpage === "Tickets Raised" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-ticket-alt" style="margin-right: 10px"></i>
-                <p>
-                  Tickets Raised
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li 
-            class="nav-item
-            {{ ($currentpage === "Rooms & Chat" || $currentpage === "Rooms" || $currentpage === "Chat" || $currentpage === "Room Detail") ? "menu-open" : ""}}"
-          >
-            <a href="#" class="nav-link">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
-                <p>
-                  Rooms & Chat
-                </p>
-              </div>
-            </a>
-            <ul class="nav nav-treeview nav-child-indent">
-              <li class="nav-item">
-                <a href="/rooms" class="nav-link {{ ($currentpage === "Rooms" || $currentpage === "Room Detail") ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
-                  <i class="nav-icon fas fa-video" style="margin-right: 10px"></i>
-                    <p>
-                      Rooms
-                    </p>
-                  </div>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="#" class="nav-link {{ $currentpage === "Chat" ? "active" : ""}}">
-                  <div class="d-flex align-items-center">
+              {{ ($currentpage === "Rooms & Chat" || $currentpage === "Rooms" || $currentpage === "Chat" || $currentpage === "Room Detail") ? "menu-open" : ""}}"
+            >
+              <a href="#" class="nav-link">
+                <div class="d-flex align-items-center">
                   <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
-                    <p>
-                      Chat
-                    </p>
-                  </div>
-                </a>
-              </li>
-            </ul>
-        </li>
-
+                  <p>
+                    Rooms & Chat
+                  </p>
+                </div>
+              </a>
+              <ul class="nav nav-treeview nav-child-indent">
+                <li class="nav-item">
+                  <a href="/rooms" class="nav-link {{ ($currentpage === "Rooms" || $currentpage === "Room Detail") ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-video" style="margin-right: 10px"></i>
+                      <p>
+                        Rooms
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a href="#" class="nav-link {{ $currentpage === "Chat" ? "active" : ""}}">
+                    <div class="d-flex align-items-center">
+                    <i class="nav-icon fas fa-comments" style="margin-right: 10px"></i>
+                      <p>
+                        Chat
+                      </p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
+         
           <li class="nav-item">
             <a href="#" class="nav-link">
               <div class="d-flex align-items-center">
@@ -360,27 +386,32 @@ to get the desired effect
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="/faqs" class="nav-link {{ $currentpage === "Frequently Asked Questions" ? "active" : ""}}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-question-circle" style="margin-right: 10px"></i>
-                <p>
-                  FAQ
-                </p>
-              </div>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="/ratings" class="nav-link {{ $currentpage === "Ratings" ? "active" : "" }}">
-              <div class="d-flex align-items-center">
-                <i class="nav-icon fas fa-star" style="margin-right: 10px"></i>
-                <p>
-                  Ratings
-                </p>
-              </div>
-            </a>
-          </li>
+          @if (user_is_authorized($permissions, 'VIEW_FAQ'))
+            <li class="nav-item">
+              <a href="/faqs" class="nav-link {{ $currentpage === "Frequently Asked Questions" ? "active" : ""}}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-question-circle" style="margin-right: 10px"></i>
+                  <p>
+                    FAQ
+                  </p>
+                </div>
+              </a>
+            </li>
+          @endif
+          
+          @if (user_is_authorized($permissions, 'VIEW_RATING'))
+            <li class="nav-item">
+              <a href="/ratings" class="nav-link {{ $currentpage === "Ratings" ? "active" : "" }}">
+                <div class="d-flex align-items-center">
+                  <i class="nav-icon fas fa-star" style="margin-right: 10px"></i>
+                  <p>
+                    Ratings
+                  </p>
+                </div>
+              </a>
+            </li>
+          @endif
+         
 
           <li class="nav-item">
             <a href="/profile" class="nav-link {{ $currentpage === "Admin Profile" ? "active" : "" }}">
