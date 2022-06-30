@@ -95,7 +95,7 @@ class AuthController extends Controller
             $verification = new Verification;
             $verification->code = $generatedVerificationCode;
             $user->verifications()->save($verification);
-            
+
             $info['name'] = $request->first_name;
             $info['verification'] = $generatedVerificationCode;
 
@@ -120,7 +120,11 @@ class AuthController extends Controller
             ],200);
         }
 
+       
         $token = $user->createToken('auth_token')->plainTextToken;
+        
+        $info['name'] = $request->first_name;
+        $info['verification'] = $generatedVerificationCode;
         Mail::to($user->email)->send(new UserMail($info));
 
         return response()->json([
