@@ -257,7 +257,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if($user) {
-            if($user->verifications){
+            if(count($user->verifications)){
                 $verification = $user->verifications[count($user->verifications)-1];
                 if($request->verification_code === $verification->code) {
                     $user->password = Hash::make($request->password);
