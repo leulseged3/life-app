@@ -35,7 +35,7 @@ class AuthController extends Controller
             "categories.*"  => "distinct|min:1",
             "specialities"    => "required_if:is_mhp, 1|array|min:1",
             "specialities.*"  => "distinct|min:1",
-            'profile_pic' => 'required_if:is_mhp, 1|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'profile_pic' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
          
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $generatedVerificationCode = rand(1231,7879);
 
 
-        if($request->hasfile('profile_pic') && $request->is_mhp == 1){
+        if($request->hasfile('profile_pic')){
             $path = $request->file('profile_pic')->store('public/profile_pics');
             $profile_pic_name = explode("/", $path)[2];
         }
