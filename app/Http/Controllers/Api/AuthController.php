@@ -68,6 +68,10 @@ class AuthController extends Controller
             'profile_pic' => $profile_pic_name
         ]);
 
+        $verification = new Verification;
+        $verification->code = $generatedVerificationCode;
+        $user->verifications()->save($verification);
+
         if(count((array)$request->categories) && $request->is_mhp == 0) {
             $user->categories()->attach($request->categories);
         }
@@ -91,10 +95,6 @@ class AuthController extends Controller
                 $ceritificate->file = $file_name;
                 $ceritificate->save();
             }
-
-            $verification = new Verification;
-            $verification->code = $generatedVerificationCode;
-            $user->verifications()->save($verification);
 
             $info['name'] = $request->first_name;
             $info['verification'] = $generatedVerificationCode;
@@ -168,7 +168,7 @@ class AuthController extends Controller
     }
 
     public function verify(Request $request){
-        if($request->user()->verifications){
+        if(count($request->user()->verifications)){
             $verification = $request->user()->verifications[count($request->user()->verifications)-1];
             if($request->verification_code === $verification->code) {
                 $updateUser = User::find($request->user()->id);
