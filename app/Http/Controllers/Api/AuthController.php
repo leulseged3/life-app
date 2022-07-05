@@ -31,11 +31,7 @@ class AuthController extends Controller
             'bios'=> 'nullable|string',
             'certificates' => 'required_if:is_mhp, 1|array|min:1',
             'certificates.*' => 'mimes:jpeg,bmp,png,gif,svg,pdf|max:1024',
-            "categories"    => "array|min:1|nullable",
-            "categories.*"  => "distinct|min:1",
-            "specialities"    => "required_if:is_mhp, 1|array|min:1",
-            "specialities.*"  => "distinct|min:1",
-            'profile_pic' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'profile_pic' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
          
@@ -72,13 +68,13 @@ class AuthController extends Controller
         $verification->code = $generatedVerificationCode;
         $user->verifications()->save($verification);
 
-        if(count((array)$request->categories) && $request->is_mhp == 0) {
-            $user->categories()->attach($request->categories);
-        }
+        // if(count((array)$request->categories) && $request->is_mhp == 0) {
+        //     $user->categories()->attach($request->categories);
+        // }
 
-        if(count((array)$request->specialities) && $request->is_mhp == 1) {
-            $user->specialities()->attach($request->specialities);
-        }
+        // if(count((array)$request->specialities) && $request->is_mhp == 1) {
+        //     $user->specialities()->attach($request->specialities);
+        // }
 
         if($request->hasfile('certificates') && $request->is_mhp == 1){
             foreach($request->file('certificates') as $file)
@@ -111,11 +107,10 @@ class AuthController extends Controller
                 'is_mhp' => $request->is_mhp,
                 'bios' => $request->bios,
                 'certificates' => $user->certificates,
-                'categories' => $request->categories,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 // 'categories' => $request->categories,
-                'specialities' => $request->specialities,
+                // 'specialities' => $request->specialities,
                 'profile_pic' => $profile_pic_name
             ],200);
         }
@@ -137,7 +132,7 @@ class AuthController extends Controller
             'bios' => $request->bios,
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'categories' => $user->categories,
+            // 'categories' => $user->categories,
             'profile_pic' => $profile_pic_name
         ],200);
     }
@@ -163,7 +158,7 @@ class AuthController extends Controller
             'is_mhp' => $user->is_mhp,
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'categories' => $user->categories
+            // 'categories' => $user->categories
         ], 200);
     }
 

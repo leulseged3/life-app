@@ -98,6 +98,8 @@ Route::middleware(['auth:sanctum','verified'])->prefix('profile')->group(functio
 
 Route::middleware(['auth:sanctum','verified'])->prefix('users')->group(function() {
     Route::get('/', [UserController::class, 'index']);
+    Route::post('/categories', [UserController::class, 'uploadCategory']);
+    Route::post('/specialities', [UserController::class, 'uploadSpeciality']);
     Route::get('/{id}', [UserController::class, 'show']);
 });
 

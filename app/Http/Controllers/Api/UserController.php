@@ -125,4 +125,65 @@ class UserController extends Controller
             'message' => 'something wen wrong'
         ], 500);
     }
+
+    public function uploadCategory(Request $request){
+        $validator = Validator::make($request->all(), [
+            "categories"    => "required|array|min:1|nullable",
+            "categories.*"  => "distinct|min:1",
+        ]);
+
+        if($request->user()->is_mhp){
+            return response()->json([
+                'success' => false,
+                'message' => 'you can not add categories for mhp'
+            ], 400);
+        }
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return response()->json([
+                'success' => false,
+                'error' => $errors
+            ], 400);
+        }
+
+        if(!count($request->user()->categories)) {
+            $request->user()->categories()->attach($request->categories);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'categories is added successfully'
+        ], 200);
+    }
+
+    public function uploadSpeciality(Request $request){
+        $validator = Validator::make($request->all(), [
+            "specialities"    => "required|array|min:1|nullable",
+            "specialities.*"  => "distinct|min:1",
+        ]);
+
+        if(!$request->user()->is_mhp){
+            return response()->json([
+                'success' => false,
+                'message' => 'you can not add specialities for non mhp user'
+            ], 400);
+        }
+
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return response()->json([
+                'success' => false,
+                'error' => $errors
+            ], 400);
+        }
+
+        if(!count($request->user()->specialities)) {
+            $request->user()->specialities()->attach($request->specialities);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'specialities is added successfully'
+        ], 200);
+    }
 }
