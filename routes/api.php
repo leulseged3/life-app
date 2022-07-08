@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\SpecialityController;
+use App\Http\Controllers\Api\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,3 +111,9 @@ Route::middleware(['auth:sanctum','verified'])->prefix('tickets')->group(functio
     Route::get('/{id}', [TicketController::class, 'show']);
 });
 
+Route::middleware(['auth:sanctum','verified'])->prefix('search')->group(function() {
+    Route::get('/mhps/{query}', [SearchController::class, 'searchMhps']);
+    Route::post('/', [SearchController::class, 'create']);
+    Route::post('/upload', [SearchController::class, 'uploadProfile']);
+    Route::get('/{id}', [SearchController::class, 'show']);
+});
