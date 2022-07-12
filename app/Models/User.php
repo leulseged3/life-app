@@ -96,4 +96,10 @@ class User extends Authenticatable implements MustVerifyEmail
    public function rooms(){
     return $this->hasMany(Room::class);
    }
+   function delete()
+    {
+        $this->articles()->delete();
+        
+        parent::delete();
+    }
 }
