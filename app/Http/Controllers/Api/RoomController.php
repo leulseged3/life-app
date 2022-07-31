@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Room;
 use Firebase\JWT\JWT;
 use DateTime;
+use App\Models\Meeting;
+
 class RoomController extends Controller
 {
     public function index(){
-        $rooms = Room::with(['categories', 'users'])->paginate(5);
+        $rooms = Room::with(['categories', 'users','meeting'])->get();
         return response()->json($rooms, 200);
     }
 
@@ -115,7 +117,6 @@ class RoomController extends Controller
     }
 
     public function create(Request $request){
-        // return response()->json(env('VIDEOSDK_API_KEY'), 200);
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required',
@@ -124,6 +125,7 @@ class RoomController extends Controller
             'limit' => 'required|numeric|min:1',
             "categories"    => "required|array|min:1",
             "categories.*"  => "required|numeric|distinct|min:1",
+            "meetingID" => "required|string",
         ]);
 
         if($validator->fails()){
@@ -139,6 +141,11 @@ class RoomController extends Controller
         $request->user()->rooms()->save($room);
         $room->categories()->attach($request->categories);
 
+        $meeting = new Meeting;
+        $meeting->meetingID = $request->meetingID;
+        $meeting->room_id = $room->id;
+        $meeting->save();
+
         return response()->json([
             'title' => $room->title,
             'description' => $room->description,
@@ -146,6 +153,7 @@ class RoomController extends Controller
             'time' => $room->time,
             'limit' => $room->limit,
             'categories' => $room->categories,
+            'meetingID'=> $room->meeting->meetingID
         ]);
     }
 
