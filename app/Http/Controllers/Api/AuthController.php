@@ -158,6 +158,7 @@ class AuthController extends Controller
             'is_mhp' => $user->is_mhp,
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'bios' => $user->bios,
             // 'categories' => $user->categories
         ], 200);
     }
@@ -165,6 +166,17 @@ class AuthController extends Controller
     public function verify(Request $request){
         if(count($request->user()->verifications)){
             $verification = $request->user()->verifications[count($request->user()->verifications)-1];
+            $nowTime = strtotime(Carbon::now());
+            $emailSentTime = strtotime($verification->created_at);
+            // $interval = $nowTime->diff($emailSentTime);
+            $interval = round(($nowTime - $emailSentTime) / 60,2);
+
+            if($interval > 30) {
+                return response()->json([
+                    'message' => 'The code is expired.please resend new'
+                ], 400);
+            }
+            
             if($request->verification_code === $verification->code) {
                 $updateUser = User::find($request->user()->id);
                 $updateUser->email_verified_at = Carbon::now();
