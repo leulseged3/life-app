@@ -50,6 +50,9 @@ Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function(
     Route::post('/', [RoomController::class, 'create']);
     Route::get('/', [RoomController::class, 'index']);
     Route::post('/toggle', [RoomController::class, 'toggle']);
+    Route::get('/get-token', [RoomController::class, 'getToken']);
+    Route::post('/create-meeting', [RoomController::class, 'createMeeting']);
+    Route::post('/validate-meeting', [RoomController::class, 'createMeeting']);
 });
 
 Route::middleware(['auth:sanctum','verified'])->prefix('articles')->group(function() {
