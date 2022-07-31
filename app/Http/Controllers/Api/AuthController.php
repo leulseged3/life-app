@@ -161,7 +161,8 @@ class AuthController extends Controller
             'bios' => $user->bios,
             'followers' => $user->followers,
             'followings' => $user->followings,
-            'rating' => $user->rating
+            'rating' => $user->rating,
+            'profile_pic' => $user->profile_pic
             // 'categories' => $user->categories
         ], 200);
     }
