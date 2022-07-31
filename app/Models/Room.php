@@ -22,4 +22,8 @@ class Room extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function meeting(){
+        return $this->hasOne(Meeting::class);
+    }
 }
