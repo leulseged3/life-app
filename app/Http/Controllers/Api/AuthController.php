@@ -159,6 +159,9 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'bios' => $user->bios,
+            'followers' => $user->followers,
+            'followings' => $user->followings,
+            'rating' => $user->rating
             // 'categories' => $user->categories
         ], 200);
     }
