@@ -13,7 +13,7 @@ use App\Models\Meeting;
 class RoomController extends Controller
 {
     public function index(){
-        $rooms = Room::with(['categories', 'users','meeting'])->get();
+        $rooms = Room::with(['categories', 'users','meeting','user'])->orderBy('id', 'DESC')->get();
         return response()->json($rooms, 200);
     }
 
