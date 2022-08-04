@@ -99,6 +99,7 @@ class AuthController extends Controller
             Mail::to($user->email)->send(new UserMail($info));
 
             return response()->json([
+                'id' => $user->id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
@@ -123,6 +124,7 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new UserMail($info));
 
         return response()->json([
+            'id' => $user->id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -150,6 +152,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
+            'id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
