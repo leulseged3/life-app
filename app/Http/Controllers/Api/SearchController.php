@@ -12,7 +12,7 @@ class SearchController extends Controller
         $mhps = User::where('is_mhp', 1)
         ->where('first_name','LIKE','%'.$query.'%')
         ->orWhere('last_name','LIKE','%'.$query.'%')
-        ->get();
+        ->with(['rating','followers','followings','specialities'])->get();
 
         return response()->json($mhps, 200);
     }
