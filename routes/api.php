@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\SpecialityController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,16 +44,6 @@ Route::middleware('auth:sanctum')->prefix('email')->group(function() {
 Route::prefix('password')->group(function() {
     Route::post('/reset', [AuthController::class, 'reset']);
     Route::post('/new', [AuthController::class, 'newPassword']);
-});
-
-//ROOMS ROUTES
-Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function() {
-    Route::post('/', [RoomController::class, 'create']);
-    Route::get('/', [RoomController::class, 'index']);
-    Route::post('/toggle', [RoomController::class, 'toggle']);
-    Route::get('/get-token', [RoomController::class, 'getToken']);
-    Route::post('/create-meeting', [RoomController::class, 'createMeeting']);
-    Route::post('/validate-meeting', [RoomController::class, 'createMeeting']);
 });
 
 Route::middleware(['auth:sanctum','verified'])->prefix('articles')->group(function() {
@@ -116,7 +107,24 @@ Route::middleware(['auth:sanctum','verified'])->prefix('tickets')->group(functio
 
 Route::middleware(['auth:sanctum','verified'])->prefix('search')->group(function() {
     Route::get('/mhps/{query}', [SearchController::class, 'searchMhps']);
-    Route::post('/', [SearchController::class, 'create']);
-    Route::post('/upload', [SearchController::class, 'uploadProfile']);
-    Route::get('/{id}', [SearchController::class, 'show']);
+});
+
+Route::middleware(['auth:sanctum','verified'])->prefix('messages')->group(function() {
+    Route::post('/', [MessageController::class, 'create']);
+    Route::get('/', [MessageController::class, 'index']);
+});
+
+
+//ROOMS ROUTES
+Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function() {
+    Route::post('/', [RoomController::class, 'create']);
+    Route::get('/', [RoomController::class, 'index']);
+    Route::post('/toggle', [RoomController::class, 'toggle']);
+    Route::get('/get-token', [RoomController::class, 'getToken']);
+    Route::post('/create-meeting', [RoomController::class, 'createMeeting']);
+    Route::post('/validate-meeting', [RoomController::class, 'createMeeting']);
+
+    //100ms RELATED ENDPOINTS
+    Route::get('/get-management-token', [RoomController::class, 'getManagementToken']);
+    Route::get('/get-app-token', [RoomController::class, 'getAppToken']);
 });
