@@ -9,6 +9,7 @@ use App\Models\Room;
 use Firebase\JWT\JWT;
 use DateTime;
 use App\Models\Meeting;
+use Ramsey\Uuid\Uuid;
 
 class RoomController extends Controller
 {
@@ -17,6 +18,61 @@ class RoomController extends Controller
         return response()->json($rooms, 200);
     }
 
+    public function getManagementToken(){
+        $app_access_key = "62f14b83c16640065696d49a";
+        $app_secret = "6HXYBro-Jvp5-AFEwUocQnuOvzQZJjBSSohoKv8JNq2zSfpn07ylWB6zfCcBGsRhbq9i9QLrSnM2GQQUo1KDJ3c06KAwKROUmC_-gVuqZLB5MWzH1NCpYNUHusLHEXepd2Zxe-jlZ-ohL1zla0icASLtWr3FuCvX7_iNVTCVWs0=";
+        
+        $issuedAt   = new DateTime();
+        $expire = $issuedAt->modify('+24 hours')->getTimestamp();
+        
+        $payload = [
+            'access_key' => $app_access_key,
+            'type' => 'management',
+            'version' => 2,
+            'jti' =>  Uuid::uuid4()->toString(),
+            'iat'  => $issuedAt->modify('-24 hours')->getTimestamp(),
+            'nbf'  => $issuedAt->getTimestamp(),
+            'exp'  => $expire,
+        ];
+        
+        $token = JWT::encode($payload, $app_secret, 'HS256');
+
+        return $token;
+    }
+
+    public function getAppToken(){
+        $issuedAt  = new DateTime();
+        $expire    = $issuedAt->modify('+24 hours')->getTimestamp();
+        $accessKey = "62f14b83c16640065696d49a";
+        $secret = "6HXYBro-Jvp5-AFEwUocQnuOvzQZJjBSSohoKv8JNq2zSfpn07ylWB6zfCcBGsRhbq9i9QLrSnM2GQQUo1KDJ3c06KAwKROUmC_-gVuqZLB5MWzH1NCpYNUHusLHEXepd2Zxe-jlZ-ohL1zla0icASLtWr3FuCvX7_iNVTCVWs0=";
+        $version   = 2;
+        $type      = "app";
+        $role      = "<role>";
+        $roomId    = "<room_id>";
+        $userId    = "<user_id>";
+        
+        $payload = [
+            'iat'  => $issuedAt->modify('-24 hours')->getTimestamp(),
+            'nbf'  => $issuedAt->getTimestamp(),
+            'exp'  => $expire,
+            'access_key' => $accessKey,
+            'type' => "app",
+            'jti' =>  Uuid::uuid4()->toString(),
+            'version' => 2,
+            'role' => $role,
+            'room_id' => $roomId,
+            'user_id' => $userId
+        ];
+        
+        $token = JWT::encode(
+            $payload,
+            $secret,
+            'HS256'
+        );
+
+        return $token;
+    }
+    
     public function getToken(){
         header("Content-type: application/json; charset=utf-8");
         $issuedAt = new DateTime();
