@@ -112,6 +112,7 @@ Route::middleware(['auth:sanctum','verified'])->prefix('search')->group(function
 Route::middleware(['auth:sanctum','verified'])->prefix('messages')->group(function() {
     Route::post('/', [MessageController::class, 'create']);
     Route::get('/', [MessageController::class, 'index']);
+    Route::get('/{user_id}', [MessageController::class, 'detail']);
 });
 
 
