@@ -14,6 +14,6 @@ class Article extends Model
     }
 
     public function owner(){
-        return $this->morphTo();
+        return $this->morphTo()->select(['id', 'first_name','last_name','profile_pic']);
     }
 }

@@ -66,12 +66,20 @@ class RegisterSuperAdminCommand extends Command
      */
     private function getDetails() : array
     {
-        $details['name'] = '';
-        $details['name'] = $this->ask('Name');
+        $details['first_name'] = '';
+        $details['first_name'] = $this->ask('First Name');
 
-        while(!$this->isInvalidName((string)$details['name'])){
-            $this->error('Please Enter a Valid Name');
-            $details['name'] = $this->ask('Name');
+        $details['last_name'] = '';
+        $details['last_name'] = $this->ask('Last Name');
+
+        while(!$this->isInvalidName((string)$details['first_name'])){
+            $this->error('Please Enter a Valid First Name');
+            $details['first_name'] = $this->ask('First Name');
+        }
+
+        while(!$this->isInvalidName((string)$details['last_name'])){
+            $this->error('Please Enter a Valid Last Name');
+            $details['last_name'] = $this->ask('Last Name');
         }
 
         $details['email'] = $this->ask('Email');
@@ -111,11 +119,12 @@ class RegisterSuperAdminCommand extends Command
         if($admin->email == 'false') {
             $this->error('Can not create multiple super admin!');
         }else {
-            $headers = ['Name', 'Email', 'Super admin'];
+            $headers = ['First Name','Last Name','Email', 'Super admin'];
             $fields = [
-                'Name' => $admin->name,
-                'email' => $admin->email,
-                'admin' => $admin->isSuperAdmin()
+                'First Name' => $admin->first_name,
+                'Last Name' => $admin->last_name,
+                'Email' => $admin->email,
+                'Super Admin' => $admin->isSuperAdmin()
             ];
     
             $this->info('Super admin created');
