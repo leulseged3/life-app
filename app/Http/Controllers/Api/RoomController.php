@@ -19,8 +19,8 @@ class RoomController extends Controller
     }
 
     public function getManagementToken(){
-        $app_access_key = "62f14b83c16640065696d49a";
-        $app_secret = "6HXYBro-Jvp5-AFEwUocQnuOvzQZJjBSSohoKv8JNq2zSfpn07ylWB6zfCcBGsRhbq9i9QLrSnM2GQQUo1KDJ3c06KAwKROUmC_-gVuqZLB5MWzH1NCpYNUHusLHEXepd2Zxe-jlZ-ohL1zla0icASLtWr3FuCvX7_iNVTCVWs0=";
+        $app_access_key = "63143742c16640065698d433";
+        $app_secret = "xdusHjZaDBEKdH6V3lroZpd1we1Tv3yvqY2X1sYaFIWUeZ9p4sYGo7I32Q5uL5DHVCb22-8Yi8UqERNmcbPbFftAo36hhcSSAAfrGkAXo6Al9UiVXfQ6D9eN7F4JdkEIU8u1MVDGsZSTZGm6JIoWqp_FzWgMaos5-S2QZ_Nr8Vk=";
         
         $issuedAt   = new DateTime();
         $expire = $issuedAt->modify('+24 hours')->getTimestamp();
@@ -41,10 +41,11 @@ class RoomController extends Controller
     }
 
     public function getAppToken(){
+        
         $issuedAt  = new DateTime();
         $expire    = $issuedAt->modify('+24 hours')->getTimestamp();
-        $accessKey = "62f14b83c16640065696d49a";
-        $secret = "6HXYBro-Jvp5-AFEwUocQnuOvzQZJjBSSohoKv8JNq2zSfpn07ylWB6zfCcBGsRhbq9i9QLrSnM2GQQUo1KDJ3c06KAwKROUmC_-gVuqZLB5MWzH1NCpYNUHusLHEXepd2Zxe-jlZ-ohL1zla0icASLtWr3FuCvX7_iNVTCVWs0=";
+        $accessKey = "63143742c16640065698d433";
+        $secret = "xdusHjZaDBEKdH6V3lroZpd1we1Tv3yvqY2X1sYaFIWUeZ9p4sYGo7I32Q5uL5DHVCb22-8Yi8UqERNmcbPbFftAo36hhcSSAAfrGkAXo6Al9UiVXfQ6D9eN7F4JdkEIU8u1MVDGsZSTZGm6JIoWqp_FzWgMaos5-S2QZ_Nr8Vk=";
         $version   = 2;
         $type      = "app";
         $role      = "<role>";
