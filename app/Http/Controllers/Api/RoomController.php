@@ -40,17 +40,23 @@ class RoomController extends Controller
         return $token;
     }
 
-    public function getAppToken(){
-        
+    public function getAppToken(Request $request){
+        $validator = Validator::make($request->all(), [
+            'roomId' => 'required|string',
+            'userId' => 'required|string',
+            'role' => 'string',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors()], 400);
+        }
+
         $issuedAt  = new DateTime();
         $expire    = $issuedAt->modify('+24 hours')->getTimestamp();
         $accessKey = "63143742c16640065698d433";
         $secret = "xdusHjZaDBEKdH6V3lroZpd1we1Tv3yvqY2X1sYaFIWUeZ9p4sYGo7I32Q5uL5DHVCb22-8Yi8UqERNmcbPbFftAo36hhcSSAAfrGkAXo6Al9UiVXfQ6D9eN7F4JdkEIU8u1MVDGsZSTZGm6JIoWqp_FzWgMaos5-S2QZ_Nr8Vk=";
         $version   = 2;
         $type      = "app";
-        $role      = "<role>";
-        $roomId    = "<room_id>";
-        $userId    = "<user_id>";
         
         $payload = [
             'iat'  => $issuedAt->modify('-24 hours')->getTimestamp(),
@@ -60,9 +66,9 @@ class RoomController extends Controller
             'type' => "app",
             'jti' =>  Uuid::uuid4()->toString(),
             'version' => 2,
-            'role' => $role,
-            'room_id' => $roomId,
-            'user_id' => $userId
+            'role' => $request->role,
+            'room_id' => $request->roomId,
+            'user_id' => $request->userId
         ];
         
         $token = JWT::encode(
