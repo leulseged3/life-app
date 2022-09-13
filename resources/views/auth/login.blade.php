@@ -41,13 +41,13 @@
       </div>
     </div>
   </form>
-  @foreach ($errors->all() as $error)
+  {{-- @foreach ($errors->all() as $error)
   <ul>
     <li>
       <p style="color: red">{{ $error }}</p>
     </li>
   </ul>
-  @endforeach
+  @endforeach --}}
 
   <p class="mb-1">
     <a href="/forgot-password">I forgot my password</a>
