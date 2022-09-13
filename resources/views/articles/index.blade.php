@@ -54,7 +54,7 @@
               @else
                 <td>No</td>
               @endif
-              <td class="d-flex" style="justify-content: space-around">
+              <td>
                 <a href="/articles/{{$article->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a>

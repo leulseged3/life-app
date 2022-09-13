@@ -28,7 +28,7 @@
               <td>{{$rating->number_of_raters}}</td>
               <td>{{$rating->total_ratings/$rating->number_of_raters}}</td>
 
-              <td class="d-flex" style="justify-content: space-around">
+              <td>
                 <a 
                   href="#"
                   data-toggle="modal" 

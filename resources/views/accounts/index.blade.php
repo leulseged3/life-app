@@ -32,7 +32,7 @@
                   <td>Has no role</td>
               @endif
 
-              <td class="d-flex" style="justify-content: space-around">
+              <td>
                 <a 
                   href="#" 
                   data-toggle="modal" 

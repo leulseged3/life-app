@@ -23,7 +23,7 @@
               <td>{{$mhp->email}}</td>
               <td><a href="/mhps/{{$mhp->id}}">{{$mhp->username}}</a></td>
               <td>{{$mhp->mobile_number}}</td>
-              <td class="d-flex" style="justify-content: space-around">
+              <td>
                 {{-- <a href="/mhps/{{$mhp->id}}">
                   <i class="fas fa-info" title="Info" ></i>
                 </a> --}}
@@ -41,6 +41,7 @@
                   data-toggle="modal" 
                   data-target="#mhp-delete-modal"
                   data-mhp="{{$mhp}}"
+                  style="margin-left: 30px;"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

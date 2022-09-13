@@ -36,7 +36,15 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="image" class="form-label">Image</label>
-              <input type="file" class="form-control" id="image" name="image" required>
+              <div class="input-group">
+                {{-- <div class="input-group-prepend">
+                  <span class="input-group-text">Upload</span>
+                </div> --}}
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="image" required>
+                  <label class="custom-file-label" for="inputGroupFile01" >Choose Picture</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

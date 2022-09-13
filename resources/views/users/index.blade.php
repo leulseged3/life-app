@@ -23,7 +23,7 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->mobile_number}}</td>
-                <td class="d-flex" style="justify-content: space-around">
+                <td>
                   <a 
                     href="#" 
                     data-toggle="modal" 
@@ -37,6 +37,7 @@
                     data-toggle="modal" 
                     data-target="#user-delete-modal"
                     data-user="{{$user}}"
+                    style="margin-left: 30px;"
                   >
                     <i class="fas fa-trash" title="Delete" style="color: red"></i>
                   </a>

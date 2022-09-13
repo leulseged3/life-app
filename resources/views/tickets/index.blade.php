@@ -37,7 +37,7 @@
               <td>{{$ticket->message}}</td>
               <td>{{$ticket->reply}}</td>
 
-              <td class="d-flex" style="justify-content: space-around">
+              <td>
                 {{-- <a href="/tickets/{{$ticket->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a> --}}
