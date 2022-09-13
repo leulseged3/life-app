@@ -57,13 +57,26 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row" >
                 <label for="inputEmail" class="col-sm-2 col-form-label">Upload Profile Picture</label>
-                <div class="col-sm-6">
-                  <input type="file" class="form-control" id="inputProfilePic" name="profile_pic">
+                <div class="col-sm-6" >
+                  {{-- <input 
+                    type="file" 
+                    style="background-color:red; align-self: center;padding-bottom: 10px;" 
+                    class="form-control" id="inputProfilePic" name="profile_pic"> --}}
+                    <div class="input-group">
+                      {{-- <div class="input-group-prepend">
+                        <span class="input-group-text">Upload</span>
+                      </div> --}}
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input"  name="profile_pic">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose Picture</label>
+                      </div>
+                    </div>
                 </div>
+                
               </div>
-
+              
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                   <button type="submit" class="btn btn-primary">Update</button>
