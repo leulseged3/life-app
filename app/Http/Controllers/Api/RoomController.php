@@ -30,7 +30,7 @@ class RoomController extends Controller
             'type' => 'management',
             'version' => 2,
             'jti' =>  Uuid::uuid4()->toString(),
-            'iat'  => $issuedAt->modify('-24 hours')->getTimestamp(),
+            'iat'  => $issuedAt->getTimestamp(),
             'nbf'  => $issuedAt->getTimestamp(),
             'exp'  => $expire,
         ];
@@ -59,7 +59,7 @@ class RoomController extends Controller
         $type      = "app";
         
         $payload = [
-            'iat'  => $issuedAt->modify('-24 hours')->getTimestamp(),
+            'iat'  => $issuedAt->getTimestamp(),
             'nbf'  => $issuedAt->getTimestamp(),
             'exp'  => $expire,
             'access_key' => $accessKey,

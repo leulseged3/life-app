@@ -126,6 +126,6 @@ Route::middleware(['auth:sanctum','verified'])->prefix('rooms')->group(function(
     Route::post('/validate-meeting', [RoomController::class, 'createMeeting']);
 
     //100ms RELATED ENDPOINTS
-    Route::get('/get-management-token', [RoomController::class, 'getManagementToken']);
-    Route::get('/get-app-token', [RoomController::class, 'getAppToken']);
+    Route::post('/get-management-token', [RoomController::class, 'getManagementToken']);
+    Route::post('/get-app-token', [RoomController::class, 'getAppToken']);
 });
