@@ -2,14 +2,14 @@
   <script>
     $('#category-delete-modal').on('show.bs.modal', function(e) {
       var category = $(e.relatedTarget).data('category');
-      $('#category_delete_title').text("Delete " + category.title + " Category");
+      $('#category_delete_title').text("Delete " + category.title.substring(0, 35) + " Category");
       $('#category_delete_id').val(category.id);
     });
   </script>
 @endpush
-<div class="modal fade" id="category-delete-modal">
+<div class="modal fade" id="category-delete-modal" >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="overflow-x: hidden;">
       <div class="modal-header">
         <h4 class="modal-title" id="category_delete_title">Delete Category</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
