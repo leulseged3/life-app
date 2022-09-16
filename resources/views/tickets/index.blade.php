@@ -10,7 +10,9 @@
     <div class="card-header">
       <h3 class="card-title">Ticket Raised List</h3>
     </div>
-    <div class="card-body">
+    <div class="card-body" 
+    {{-- style="overflow-x: hidden;" --}}
+    >
       <table id="example1" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -34,10 +36,19 @@
               </td>
 
               <td>{{$ticket->user->username}}</td>
-              <td>{{$ticket->message}}</td>
-              <td>{{$ticket->reply}}</td>
-
+              @php
+                  $array = explode(' ', $ticket->message);
+              @endphp
+              @if (count($array) === 1)
+              <td>{{substr($ticket->message,0,35)}}</td>
+              @else
               <td>
+                {{$ticket->message}}
+              </td>
+              @endif
+                
+                <td>{{$ticket->reply}}</td>
+                <td style="margin-left: 30px;">
                 {{-- <a href="/tickets/{{$ticket->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a> --}}
