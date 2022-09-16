@@ -1,7 +1,20 @@
 @php
     $permissions = App\Models\Permission::all();
 @endphp
+@push('additional-js')
+  <script>
+   $('#add-role-modal').on('hidden.bs.modal', function () {
+      $('#name').val('');
+      $("#permissions option").prop("selected", false);
+      // $("#permissions").multiselect("clearSelection");
+      // $("#permissions option[value]").remove();
+      $("#permissions").select2({
+          allowClear: true
+      });
 
+  });
+  </script>
+@endpush
 <button 
   type="button" 
   class="btn btn-outline-primary"
@@ -35,7 +48,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label>Permissions</label>
-              <select name="permissions[]" class="select2" multiple="multiple" data-placeholder="Select permissions" style="width: 100%;" required>
+              <select name="permissions[]" id="permissions" class="select2" multiple="multiple" data-placeholder="Select permissions" style="width: 100%;" required>
                 @foreach ($permissions as $permission)
                   <option value="{{$permission->id}}">{{$permission->name}}</option>
                 @endforeach
