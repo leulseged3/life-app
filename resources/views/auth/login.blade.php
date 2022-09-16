@@ -19,7 +19,13 @@
       </div>
     </div>
     <div class="input-group mb-3">
-      <input type="password" class="form-control" placeholder="Password" name="password">
+      {{-- <i class="bi bi-eye-slash" id="togglePassword"></i> --}}
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <span class="fas fa-eye" id="togglePassword"></span>
+        </div>
+      </div>
+      <input type="password" class="form-control" placeholder="Password" name="password" id="password">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fas fa-lock"></span>

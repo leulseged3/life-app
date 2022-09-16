@@ -50,5 +50,34 @@
     });
   </script>
 @endif
+<script>
+  console.log("hmm")
+  const togglePassword = document
+      .querySelector('#togglePassword');
+
+  const password = document.querySelector('#password');
+  // console.log("hmm")
+  togglePassword.addEventListener('click', () => {
+
+      // Toggle the type attribute using
+      // getAttribure() method
+      const type = password
+          .getAttribute('type') === 'password' ?
+          'text' : 'password';
+            
+      password.setAttribute('type', type);
+
+      // Toggle the eye and bi-eye icon
+      // this.classList.toggle('fa-eye');
+      if(togglePassword.classList[1] === 'fa-eye-slash') {
+        togglePassword.classList.remove('fa-eye-slash');
+        togglePassword.classList.add('fa-eye');
+      } else {
+        togglePassword.classList.remove('fa-eye');
+        togglePassword.classList.add('fa-eye-slash');
+      }
+      console.log(togglePassword.classList[1])
+  });
+</script>
 </body>
 </html>
