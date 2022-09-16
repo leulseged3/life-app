@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<h2>Welcome to Life app {{$admin['name']}}</h2>
+<h2>Welcome to Life app {{$admin['first_name']}}  {{$admin['last_name']}}</h2>
 <br/>
   you are registered as an admin.
 <br/>

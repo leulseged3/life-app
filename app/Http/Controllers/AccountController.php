@@ -23,7 +23,8 @@ class AccountController extends Controller
     {
         if (!Auth::user()->is_super_admin) return redirect()->back();
         Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:admins',
             'role' => 'required|numeric'
         ])->validate();
@@ -31,7 +32,9 @@ class AccountController extends Controller
         $generatedPassword = $this->generateRandomString();
 
         $admin = new Admin;
-        $admin->name = $request->name;
+        $admin->first_name = $request->first_name;
+        $admin->last_name = $request->last_name;
+
         $admin->email = $request->email;
         $admin->password = Hash::make($generatedPassword);
         $admin->save();
@@ -39,7 +42,9 @@ class AccountController extends Controller
         $admin->roles()->attach($request->role);
         $newAdmin = [];
 
-        $newAdmin['name'] = $request->name;
+        $newAdmin['first_name'] = $request->first_name;
+        $newAdmin['last_name'] = $request->last_name;
+
         $newAdmin['email'] = $request->email;
         $newAdmin['password'] = $generatedPassword;
         $newAdmin['roles'] = $admin->roles;

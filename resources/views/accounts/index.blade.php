@@ -24,7 +24,7 @@
         <tbody>
           @foreach($accounts as $account)
             <tr>
-              <td>{{$account->name}}</td>
+              <td>{{$account->first_name}} {{$account->last_name}}</td>
               <td>{{$account->email}}</td>
               @if (count($account->roles))
                 <td>{{$account->roles[0]->name}}</td>
@@ -50,6 +50,7 @@
                   data-account="{{$account}}"
                   data-backdrop="static" 
                   data-keyboard="false"
+                  style="margin-left: 25px;"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>
