@@ -17,7 +17,8 @@ class ProfileController extends Controller
 
     public function update(Request $request){
         Validator::make($request->all(), [
-            'name' => 'nullable|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
             'email' => 'nullable|email',
             'old_password' => 'nullable|string',
             'new_password' => 'nullable|string|confirmed|min:6',
@@ -27,9 +28,14 @@ class ProfileController extends Controller
 
         $admin = Admin::find(Auth::user()->id);
 
-        if($request->name) {
-            $admin->name = $request->name;
+        if($request->first_name) {
+            $admin->first_name = $request->first_name;
         }
+        
+        if($request->last_name) {
+            $admin->last_name = $request->last_name;
+        }
+
         if($request->file('profile_pic')){
 
             if($admin->profile_pic) {

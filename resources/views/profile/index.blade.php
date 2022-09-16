@@ -29,7 +29,7 @@
               @endif
               
             </div>
-            <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
+            <h3 class="profile-username text-center">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h3>
             <p class="text-muted text-center">{{Auth::user()->email}}</p>
           </div>
         </div>
@@ -44,9 +44,16 @@
             <form class="form-horizontal" method="POST" action="/profile/update" enctype="multipart/form-data">
               @csrf
               <div class="form-group row">
-                <label for="inputName" class="col-sm-2 col-form-label">Full Name</label>
+                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputName" name="name" placeholder="Full Name">
+                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
                 </div>
               </div>
 
