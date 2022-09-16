@@ -57,7 +57,7 @@
                   data-certificate="{{$certificate}}"
                   data-status="reject"
                 >
-                  <i class="fas fa-ban" title="Delete" style="color: red"></i>
+                  <i class="fas fa-ban" title="Reject" style="color: red"></i>
                 </a>
               </td>
           </tr>
