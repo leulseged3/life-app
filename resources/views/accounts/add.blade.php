@@ -1,6 +1,14 @@
 @php
     $roles = App\Models\Role::all();
 @endphp
+@push('additional-js')
+  <script>
+   $('#add-account-modal').on('hidden.bs.modal', function () {
+      $('#name').val('');
+      $('#email').val('');
+  });
+  </script>
+@endpush
 <button 
   type="button" 
   class="btn btn-outline-primary"
