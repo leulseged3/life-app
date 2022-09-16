@@ -51,6 +51,8 @@
                   data-toggle="modal" 
                   data-target="#room-delete-modal"
                   data-room="{{$room}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

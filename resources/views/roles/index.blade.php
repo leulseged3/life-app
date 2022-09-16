@@ -51,6 +51,8 @@
                   data-toggle="modal" 
                   data-target="#role-delete-modal"
                   data-role="{{$role}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

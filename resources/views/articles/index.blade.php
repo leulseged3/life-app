@@ -65,6 +65,8 @@
                   data-target="#article-edit-modal"
                   data-article="{{$article}}"
                   style="margin-inline: 15px;"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-edit" title="Edit"></i>
                 </a>
@@ -73,6 +75,8 @@
                   data-toggle="modal" 
                   data-target="#article-delete-modal"
                   data-article="{{$article}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

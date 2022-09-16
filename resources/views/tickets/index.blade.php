@@ -58,6 +58,8 @@
                   data-toggle="modal" 
                   data-target="#ticket-reply-modal"
                   data-ticket="{{$ticket}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   style="margin-inline: 15px;"
                 >
                   <i class="fas fa-reply" title="Reply"></i>
@@ -66,6 +68,8 @@
                   href="#"
                   data-toggle="modal" 
                   data-target="#ticket-delete-modal"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   data-ticket="{{$ticket}}"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>

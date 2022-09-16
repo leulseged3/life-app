@@ -46,6 +46,8 @@
                   data-target="#certificate-action-modal"
                   data-certificate="{{$certificate}}"
                   data-status="approve"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   style="margin-inline: 15px;"
                 >
                   <i class="fas fa-check" title="Approve" style="color: green"></i>
@@ -55,6 +57,8 @@
                   data-toggle="modal" 
                   data-target="#certificate-action-modal"
                   data-certificate="{{$certificate}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   data-status="reject"
                 >
                   <i class="fas fa-ban" title="Reject" style="color: red"></i>

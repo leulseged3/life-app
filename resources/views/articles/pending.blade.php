@@ -64,6 +64,8 @@
                   data-toggle="modal" 
                   data-target="#article-approve-modal"
                   data-article="{{$article}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   style="margin-inline: 15px;"
                 >
                   <i class="fas fa-check" title="approve" style="color: green;"></i>
@@ -72,6 +74,8 @@
                   href="#"
                   data-toggle="modal" 
                   data-target="#article-delete-modal"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   data-article="{{$article}}"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>

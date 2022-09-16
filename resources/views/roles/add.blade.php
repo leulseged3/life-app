@@ -7,6 +7,8 @@
   class="btn btn-outline-primary"
   data-toggle="modal" 
   data-target="#add-role-modal"
+  data-backdrop="static" 
+  data-keyboard="false"
   style="margin-bottom: 10px;"
 >
   <i class="fa fa-plus"></i> Add New Role

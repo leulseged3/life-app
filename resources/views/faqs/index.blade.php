@@ -24,6 +24,8 @@
               class="btn btn-info btn-sm"
               data-toggle="modal" 
               data-target="#faq-edit-modal"
+              data-backdrop="static" 
+              data-keyboard="false"
               data-faq="{{$faq}}"
             >
               <i class="fa fa-edit" aria-hidden="true"></i>
@@ -32,6 +34,8 @@
               class="btn btn-danger btn-sm"
               data-toggle="modal" 
               data-target="#faq-delete-modal"
+              data-backdrop="static" 
+              data-keyboard="false"
               data-faq="{{$faq}}"
             >
               <i class="fa fa-trash-alt" aria-hidden="true" ></i>

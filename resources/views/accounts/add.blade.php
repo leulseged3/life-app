@@ -15,6 +15,8 @@
   data-toggle="modal" 
   data-target="#add-account-modal"
   style="margin-bottom: 10px;"
+  data-backdrop="static" 
+  data-keyboard="false"
 >
   <i class="fa fa-plus"></i> Add New Account
 </button>

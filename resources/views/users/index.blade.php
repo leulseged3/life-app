@@ -29,6 +29,8 @@
                     data-toggle="modal" 
                     data-target="#user-edit-modal"
                     data-user="{{$user}}"
+                    data-backdrop="static" 
+                    data-keyboard="false"
                   >
                     <i class="fas fa-edit" title="Edit" ></i>
                   </a>
@@ -37,6 +39,8 @@
                     data-toggle="modal" 
                     data-target="#user-delete-modal"
                     data-user="{{$user}}"
+                    data-backdrop="static" 
+                    data-keyboard="false"
                     style="margin-left: 30px;"
                   >
                     <i class="fas fa-trash" title="Delete" style="color: red"></i>

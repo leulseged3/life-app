@@ -32,6 +32,8 @@
                   href="#" 
                   data-toggle="modal" 
                   data-target="#mhp-edit-modal"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   data-mhp="{{$mhp}}"
                 >
                   <i class="fas fa-edit" title="Edit" ></i>
@@ -41,6 +43,8 @@
                   data-toggle="modal" 
                   data-target="#mhp-delete-modal"
                   data-mhp="{{$mhp}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   style="margin-left: 30px;"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>

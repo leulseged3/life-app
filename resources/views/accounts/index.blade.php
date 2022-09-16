@@ -38,6 +38,8 @@
                   data-toggle="modal" 
                   data-target="#account-edit-modal"
                   data-account="{{$account}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-edit" title="Edit" ></i>
                 </a>
@@ -46,6 +48,8 @@
                   data-toggle="modal" 
                   data-target="#account-delete-modal"
                   data-account="{{$account}}"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

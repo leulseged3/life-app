@@ -28,6 +28,8 @@
             data-toggle="modal" 
             data-target="#speciality-delete-modal"
             data-speciality="{{$speciality}}"
+            data-backdrop="static" 
+            data-keyboard="false"
           >
             <i class="fa fa-trash-alt" style="color: red;"></i>
           </a>

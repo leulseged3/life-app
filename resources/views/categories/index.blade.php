@@ -28,6 +28,8 @@
             href="#"
             data-toggle="modal" 
             data-target="#category-delete-modal"
+            data-backdrop="static" 
+            data-keyboard="false"
             data-category="{{$category}}"
           >
             <i class="fa fa-trash-alt" style="color: red;"></i>

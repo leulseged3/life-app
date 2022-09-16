@@ -33,6 +33,8 @@
                   href="#"
                   data-toggle="modal" 
                   data-target="#rating-delete-modal"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   data-rating="{{$rating}}"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
