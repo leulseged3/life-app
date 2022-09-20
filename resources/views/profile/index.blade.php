@@ -67,18 +67,18 @@
               <div class="form-group row" >
                 <label for="inputEmail" class="col-sm-2 col-form-label">Upload Profile Picture</label>
                 <div class="col-sm-6" >
-                  {{-- <input 
+                  <input 
                     type="file" 
-                    style="background-color:red; align-self: center;padding-bottom: 10px;" 
-                    class="form-control" id="inputProfilePic" name="profile_pic"> --}}
+                    id="inputProfilePic" 
+                    name="profile_pic">
                     <div class="input-group">
                       {{-- <div class="input-group-prepend">
                         <span class="input-group-text">Upload</span>
-                      </div> --}}
+                      </div>
                       <div class="custom-file">
                         <input type="file" class="custom-file-input"  name="profile_pic">
                         <label class="custom-file-label" for="inputGroupFile01">Choose Picture</label>
-                      </div>
+                      </div> --}}
                     </div>
                 </div>
                 

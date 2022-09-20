@@ -39,13 +39,10 @@
             <div class="form-group col-md-12">
               <label for="icon" class="form-label">Icon</label>
               <div class="input-group">
-                {{-- <div class="input-group-prepend">
-                  <span class="input-group-text">Upload</span>
-                </div> --}}
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="icon">
-                  <label class="custom-file-label" for="inputGroupFile01">Choose Picture</label>
-                </div>
+                <input 
+                  type="file" 
+                  id="inputProfilePic" 
+                  name="icon">
               </div>
             </div>
           </div>

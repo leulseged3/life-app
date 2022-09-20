@@ -36,7 +36,12 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="icon" class="form-label">Icon</label>
-              <input type="file" class="form-control" id="icon" name="icon" placeholder="Icon" required>
+              <div class="input-group">
+                <input 
+                  type="file" 
+                  id="inputProfilePic" 
+                  name="icon">
+              </div>
             </div>
           </div>
         </div>
