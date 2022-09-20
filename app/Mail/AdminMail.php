@@ -30,6 +30,15 @@ class AdminMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.admin');
+        $address = 'leulseged3@gmail.com';
+        $subject = 'LifeApp Admin registration';
+        $name = 'TTM Counseling and Psychotherapy';
+        return $this->view('emails.admin')
+                    ->from($address, $name)
+                    ->cc($address, $name)
+                    ->bcc($address, $name)
+                    ->replyTo($address, $name)
+                    ->subject($subject)
+                    ->with([ 'admin' => $this->admin ]);
     }
 }
