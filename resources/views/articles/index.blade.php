@@ -49,7 +49,7 @@
               @else
                 <td>{{$article->owner->first_name}} {{$article->owner->last_name}}</td>
               @endif
-              @if($article->owner->name)
+              @if($article->owner_type === "App\Models\Admin")
                 <td>Yes</td>
               @else
                 <td>No</td>
