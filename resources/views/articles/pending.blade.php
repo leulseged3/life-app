@@ -54,7 +54,7 @@
               @else
                 <td>No</td>
               @endif
-              <td>
+              <td style="display: flex;border-bottom-width: 0px;justify-content: space-around;">
                 <a href="/articles/{{$article->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a>
@@ -66,7 +66,6 @@
                   data-article="{{$article}}"
                   data-backdrop="static" 
                   data-keyboard="false"
-                  style="margin-inline: 15px;"
                 >
                   <i class="fas fa-check" title="approve" style="color: green;"></i>
                 </a>

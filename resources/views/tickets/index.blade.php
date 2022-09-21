@@ -48,8 +48,8 @@
               @endif
                 
                 <td>{{$ticket->reply}}</td>
-                <td style="margin-left: 30px;">
-                {{-- <a href="/tickets/{{$ticket->id}}">
+                <td style="display: flex;border-bottom-width: 0px;justify-content: space-between;">
+                  {{-- <a href="/tickets/{{$ticket->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a> --}}
 
@@ -60,7 +60,6 @@
                   data-ticket="{{$ticket}}"
                   data-backdrop="static" 
                   data-keyboard="false"
-                  style="margin-inline: 15px;"
                 >
                   <i class="fas fa-reply" title="Reply"></i>
                 </a>

@@ -45,7 +45,7 @@
                 @endforeach
               </td>
               
-              <td>
+              <td style="display: flex;border-bottom-width: 0px;justify-content: center;">
                 <a 
                   href="#"
                   data-toggle="modal" 

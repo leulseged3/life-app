@@ -39,7 +39,7 @@
               </td>
               <td>{{$mhp->status}}</td>
 
-              <td>
+              <td style="display: flex;border-bottom-width: 0px;justify-content: space-around;">
                 <a 
                   href="#"
                   data-toggle="modal" 
@@ -48,7 +48,6 @@
                   data-status="approve"
                   data-backdrop="static" 
                   data-keyboard="false"
-                  style="margin-inline: 15px;"
                 >
                   <i class="fas fa-check" title="Approve" style="color: green"></i>
                 </a>

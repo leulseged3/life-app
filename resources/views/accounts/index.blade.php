@@ -32,7 +32,7 @@
                   <td>Has no role</td>
               @endif
 
-              <td>
+              <td style="display: flex;border-bottom-width: 0px;justify-content: space-around;">
                 <a 
                   href="#" 
                   data-toggle="modal" 
@@ -50,7 +50,6 @@
                   data-account="{{$account}}"
                   data-backdrop="static" 
                   data-keyboard="false"
-                  style="margin-left: 25px;"
                 >
                   <i class="fas fa-trash" title="Delete" style="color: red"></i>
                 </a>

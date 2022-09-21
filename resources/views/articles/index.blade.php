@@ -54,7 +54,7 @@
               @else
                 <td>No</td>
               @endif
-              <td>
+              <td style="display: flex;border-bottom-width: 0px;justify-content: space-around;">
                 <a href="/articles/{{$article->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a>
@@ -64,7 +64,6 @@
                   data-toggle="modal" 
                   data-target="#article-edit-modal"
                   data-article="{{$article}}"
-                  style="margin-inline: 15px;"
                   data-backdrop="static" 
                   data-keyboard="false"
                 >
