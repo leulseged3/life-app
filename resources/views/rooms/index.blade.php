@@ -42,7 +42,7 @@
 
               {{-- <td>{{substr($article->description,0,100)}}</td> --}}
 
-              <td style="display: flex;border-bottom-width: 0px;justify-content: space-between;">
+              <td style="display: flex;border-bottom-width: 0px;justify-content: space-around;">
                 <a href="/rooms/{{$room->id}}">
                   <i class="fas fa-info-circle" title="Details"></i>
                 </a>
