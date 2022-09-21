@@ -23,8 +23,8 @@ class AccountController extends Controller
     {
         if (!Auth::user()->is_super_admin) return redirect()->back();
         Validator::make($request->all(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|alpha|max:255',
+            'last_name' => 'required|alpha|max:255',
             'email' => 'required|email|unique:admins',
             'role' => 'required|numeric'
         ])->validate();
