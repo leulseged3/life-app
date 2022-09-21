@@ -26,6 +26,10 @@ class ProfileController extends Controller
             'profile_pic' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ])->validate();
 
+        if(!$request->first_name && !$request->last_name && !$request->email && !$request->first_name && !$request->profile_pic && !$request->new_password){
+            return redirect()->back();
+        }
+
         $admin = Admin::find(Auth::user()->id);
 
         if($request->first_name) {
