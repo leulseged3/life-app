@@ -504,6 +504,11 @@ to get the desired effect
 @endif
 <!-- AdminLTE -->
 @stack('additional-js')
+<script>
+  $('form').submit(function() {
+    $(this).find("button[type='submit']").prop('disabled',true);
+  });
+</script>
 <script src="{{ URL::asset('js/adminlte.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
