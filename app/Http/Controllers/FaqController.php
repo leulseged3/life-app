@@ -73,7 +73,7 @@ class FaqController extends Controller
         ])->validate();
             
         $faq = Faq::find($request->faq_id);
-        if($faq->question){
+        if($request->question){
             $faq->question = $request->question;
         }
 
