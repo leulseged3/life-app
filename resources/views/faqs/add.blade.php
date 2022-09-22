@@ -1,3 +1,12 @@
+@push('additional-js')
+  <script>
+   $('#add-faq-modal').on('hidden.bs.modal', function () {
+      $('#question').val('');
+      $('#answer').val('');
+      $('#inputProfilePic').val('');
+  });
+  </script>
+@endpush
 <button 
   type="button" 
   class="btn btn-outline-primary"
