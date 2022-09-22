@@ -72,7 +72,7 @@ class AccountController extends Controller
 
         if ($account) {
             $account->delete();
-            return redirect()->back()->with('message', 'Account is deleted successfully');
+            return redirect()->route('account-home')->with('message', 'Account is deleted successfully');
         }
         return redirect()->back();
     }

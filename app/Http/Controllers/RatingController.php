@@ -42,7 +42,7 @@ class RatingController extends Controller
       $ratings = Rating::where('user_id',$totalRating->user_id);
       if($ratings->delete()) {
         if($totalRating->delete()) {
-          return redirect()->back()->with('message', 'Rating is deleted successfully!');
+          return redirect()->route('ratings-home')->with('message', 'Rating is deleted successfully!');
         }
       }
     }

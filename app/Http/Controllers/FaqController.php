@@ -107,7 +107,8 @@ class FaqController extends Controller
 
         $faq = Faq::find($request->faq_id);
         if($faq->delete()) {
-            return redirect()->back()->with('message','FAQ deleted successfully!');
+            return redirect()->route('faq-home')->with('message','FAQ deleted successfully!');
         }
+        return redirect()->back();
     }
 }

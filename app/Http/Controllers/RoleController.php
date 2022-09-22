@@ -42,7 +42,8 @@ class RoleController extends Controller
 
        if($role) {
         $role->delete();
-        return redirect()->back()->with('message', 'Role is deleted successfully');
+        return redirect()->route('roles-home')->with('message', 'Role is deleted successfully');
        }
+       return redirect()->back();
     }
 }

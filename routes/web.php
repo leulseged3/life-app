@@ -18,6 +18,8 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AccountController;
+use App\Events\TicketNotification;
+use App\Events\MessageEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,14 +44,14 @@ Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 //USERS ROUTES
 Route::middleware('auth')->prefix('users')->group(function() {
-    Route::get('/', [UserController::class,'index']);
+    Route::get('/', [UserController::class,'index'])->name('users-home');
     Route::post('/edit', [UserController::class,'update']);
     Route::post('/delete', [UserController::class,'delete']);
 });
 
 //MHP's ROUTES
 Route::middleware('auth')->prefix('mhps')->group(function() {
-    Route::get('/', [MhpController::class,'index']);
+    Route::get('/', [MhpController::class,'index'])->name('mhps-home');;
     Route::get('/{id}', [MhpController::class,'show']);
     Route::post('/edit', [MhpController::class,'update']);
     Route::post('/delete', [MhpController::class,'delete']);
@@ -85,7 +87,7 @@ Route::middleware('auth')->prefix('articles')->group(function() {
 
 //FAQs ROUTES
 Route::middleware('auth')->prefix('faqs')->group(function() {
-    Route::get('/', [FaqController::class,'index']);
+    Route::get('/', [FaqController::class,'index'])->name('faq-home');
     Route::post('/create',[FaqController::class, 'create']);
     Route::post('/delete', [FaqController::class,'delete']);
     Route::post('/edit',[FaqController::class, 'update']);
@@ -93,7 +95,7 @@ Route::middleware('auth')->prefix('faqs')->group(function() {
 
 //RATINGS ROUTES
 Route::middleware('auth')->prefix('ratings')->group(function() {
-    Route::get('/', [RatingController::class,'index']);
+    Route::get('/', [RatingController::class,'index'])->name('ratings-home');
     Route::post('/delete', [RatingController::class,'delete']);
 });
 
@@ -106,7 +108,7 @@ Route::middleware('auth')->prefix('profile')->group(function() {
 
 //TiCKETS RAISED ROUTES
 Route::middleware('auth')->prefix('tickets')->group(function() {
-    Route::get('/', [TicketController::class,'index']);
+    Route::get('/', [TicketController::class,'index'])->name('tickets-home');
     Route::post('/reply', [TicketController::class,'reply']);
     Route::post('/delete', [TicketController::class,'delete']);
 });
@@ -120,7 +122,7 @@ Route::middleware('auth')->prefix('certificates')->group(function() {
 
 //ROOMS ROUTES
 Route::middleware('auth')->prefix('rooms')->group(function() {
-    Route::get('/', [RoomController::class,'index']);
+    Route::get('/', [RoomController::class,'index'])->name('rooms-home');
     Route::get('/{id}', [RoomController::class,'show']);
     Route::post('/delete', [RoomController::class,'delete']);
     // Route::post('/action', [CertificateController::class,'action']);
@@ -129,7 +131,7 @@ Route::middleware('auth')->prefix('rooms')->group(function() {
 
 //ROLE ROUTES
 Route::middleware('auth')->prefix('roles')->group(function() {
-    Route::get('/', [RoleController::class,'index']);
+    Route::get('/', [RoleController::class,'index'])->name('roles-home');
     Route::post('/create', [RoleController::class,'create']);
     Route::post('/delete', [RoleController::class,'delete']);
     // Route::post('/action', [CertificateController::class,'action']);
@@ -138,10 +140,22 @@ Route::middleware('auth')->prefix('roles')->group(function() {
 
 //ACCOUNTS ROUTES
 Route::middleware('auth')->prefix('accounts')->group(function() {
-    Route::get('/', [AccountController::class,'index']);
+    Route::get('/', [AccountController::class,'index'])->name('account-home');
     Route::post('/create', [AccountController::class,'create']);
     Route::post('/delete', [AccountController::class,'delete']);
     Route::post('/edit', [AccountController::class,'update']);
 });
 
 Route::get('/logout', [LogoutController::class, 'logout']);
+
+Route::get('/event', function(){
+    event(new TicketNotification('this is first broadcast message'));
+});
+
+Route::get('/chats', function(){
+    event(new MessageEvent('abebe','hello'));
+});
+
+Route::get('/listen', function(){
+    return view('listen');
+});

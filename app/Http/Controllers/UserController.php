@@ -74,7 +74,7 @@ class UserController extends Controller
 
         $user = User::find($request->user_id);
         if($user->delete()){
-            return redirect()->back()->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
+            return redirect()->route('users-home')->with('message',$user->first_name." ".$user->last_name.' deleted successfully!');
         } else {
             return redirect()->back();
         }

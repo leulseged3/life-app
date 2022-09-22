@@ -69,7 +69,7 @@ class TicketController extends Controller
         $ticket = Ticket::find($request->ticket_id);
 
         if($ticket->delete()){
-            return redirect()->back()->with('message','Ticket is deleted successfully!');
+            return redirect()->route('tickets-home')->with('message','Ticket is deleted successfully!');
         } else {
             return redirect()->back();
         }

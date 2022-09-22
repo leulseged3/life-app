@@ -58,7 +58,7 @@ class RoomController extends Controller
         if($room) {
             $room->delete();
 
-          return redirect()->back()->with('message', 'room is deleted successfully!');
+          return redirect()->route('rooms-home')->with('message', 'room is deleted successfully!');
         }
        return redirect()->back();
     }
