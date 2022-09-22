@@ -27,6 +27,17 @@
     <link rel="stylesheet" href="{{ URL::asset('css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+      .select2-selection--multiple:before {
+          content: "";
+          position: absolute;
+          right: 7px;
+          top: 42%;
+          border-top: 5px solid #888;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+      }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
