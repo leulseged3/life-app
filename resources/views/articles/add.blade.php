@@ -45,7 +45,7 @@
           </div>
           <div class="form-group">
             <label>Categories</label>
-            <select name="categories[]" class="select2" multiple="multiple" data-placeholder="Select a category" style="width: 100%;" required>
+            <select name="categories[]" class="select2" multiple="multiple" data-placeholder="Select a category" style="width: 100%;">
               @foreach ($categories as $category)
                 <option value="{{$category->id}}">{{$category->title}}</option>
               @endforeach
@@ -54,9 +54,9 @@
 
           <img id="output" width="200"/>
 
-          <div class="form-group">
+          <div class="form-group col-md-5">
             <label for="feature_image">Feature Image</label>
-            <input type="file" class="form-control-file" id="feature_image" name="feature_image" onchange="loadFile(event)" required>
+            <input type="file" class="form-control-file" id="feature_image" name="feature_image" onchange="loadFile(event)">
           </div>
           <div class="form-group">
             <label for="description">Description</label>

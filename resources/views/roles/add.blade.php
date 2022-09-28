@@ -48,7 +48,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label>Permissions</label>
-              <select name="permissions[]" id="permissions" class="select2" multiple="multiple" data-placeholder="Select permissions" style="width: 100%;" required>
+              <select name="permissions[]" id="permissions" class="select2" multiple="multiple" data-placeholder="Select permissions" style="width: 100%;">
                 @foreach ($permissions as $permission)
                   <option value="{{$permission->id}}">{{$permission->name}}</option>
                 @endforeach

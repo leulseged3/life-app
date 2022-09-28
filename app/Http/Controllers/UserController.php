@@ -36,6 +36,9 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        if(!$request->first_name && !$request->last_name){
+            return redirect()->back();
+        }
         //send validation error via session or other way or $errors
         $user = User::find($request->user_id);
         if($request->first_name) {

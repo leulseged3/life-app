@@ -36,7 +36,9 @@ class MhpController extends Controller
         if(!user_is_authorized($permissions, 'UPDATE_MHP')){
             return redirect()->back();
         }
-
+        if(!$request->first_name && !$request->last_name){
+            return redirect()->back();
+        }
         //send validation error via session or other way or $errors
         $user = User::find($request->user_id);
         if($request->first_name) {

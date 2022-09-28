@@ -11,15 +11,18 @@
     @foreach ($faqs as $faq)
       <div class="card">
         <div class="card-header row" id="heading{{$faq->id}}">
-          <button class="btn btn-info btn-sm">
-            <i class="fa fa-question" aria-hidden="true"></i>
-          </button>
-          <h5 class="mb-0" style="flex-grow: 1;">
+          <div>
+            <button class="btn btn-info btn-sm">
+              <i class="fa fa-question" aria-hidden="true"></i>
+            </button>
+          </div>
+         
+          <h5 class="mb-0" style="display: flex; flex: 1;">
             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$faq->id}}" aria-expanded="true" aria-controls="collapseOne">
               {{$faq->question}}
             </button>
           </h5>
-          <div style="align-self: flex-end; justify-content: flex-end; justify-self: flex-end">
+          <div style="">
             <button 
               class="btn btn-info btn-sm"
               data-toggle="modal" 

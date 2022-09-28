@@ -33,7 +33,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="last_name">Last Name</label>
-              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Father Name">
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
             </div>
           </div>
           <div class="form-row">

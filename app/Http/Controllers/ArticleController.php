@@ -126,6 +126,9 @@ class ArticleController extends Controller
         if($request->title){
             $article->title = $request->title;
         }
+        if($request->description){
+            $article->description = $request->description;
+        }
         if($request->file('feature_image')){
             Storage::delete('public/feature_images/'.$article->feature_image);
             $path = $request->file('feature_image')->store('public/feature_images');
